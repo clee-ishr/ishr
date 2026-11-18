@@ -41,10 +41,10 @@ These heights are **desktop starting values**, not measured guarantees. The comp
 | cuts | General Assembly reports cut by session | 335 |
 | roadmap | Reports cut compared with Roadmap indicative range | 330 |
 | clusters | Reporting cuts by thematic cluster | 530 |
-| core-groups | Core groups involved in reporting changes | 325 |
-| periodicity | Reporting periodicity: six-year interactive comparison | 710 |
-| waffle | Mandates affected, illustrated as a waffle chart | 340 |
-| recommendations | Interactive five-point recommendations checklist and progress bar | 840 |
+| core-groups | Core groups involved in reporting changes | 300 |
+| periodicity | Reporting periodicity: six-year interactive comparison | 680 |
+| waffle | Mandates affected, illustrated as a waffle chart | 310 |
+| recommendations | Interactive five-point recommendations checklist and progress bar | 790 |
 | all | All nine charts only (for preview, not recommended as one iframe) | 4400 |
 
 Example: `https://clee-ishr.github.io/ishr/embed.html?chart=reporting`
