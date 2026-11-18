@@ -33,6 +33,7 @@ These heights are **starting values**, not measured guarantees. Check the publis
 | chart key | Chart | Suggested iframe height |
 |---|---|---:|
 | mandates | Number of thematic mandates, 2014–2026 | 475 |
+| events-table | New, merged and discontinued mandates since 2014 | 690 |
 | reporting | HRC and General Assembly reports | 505 |
 | renewals | Renewed mandates with reduced reporting | 570 |
 | affected-table | Mandates whose reporting obligations were reduced | 1450 |
@@ -43,9 +44,12 @@ These heights are **starting values**, not measured guarantees. Check the publis
 | core-groups | Core groups involved in reporting changes | 560 |
 | periodicity | Reporting periodicity: six-year interactive comparison | 800 |
 | waffle | Mandates affected, illustrated as a waffle chart | 510 |
+| recommendations | Interactive five-point recommendations checklist and progress bar | 1060 |
 | all | All nine charts only (for preview, not recommended as one iframe) | 4400 |
 
 Example: `https://clee-ishr.github.io/ishr/embed.html?chart=reporting`
+
+**WordPress has 13 iframe placements** in the full article: nine chart views, three data-table views and one recommendations checklist. The two mandate-status tables use the keys `affected-table` and `unaffected-table`. The historical events table uses `events-table`.
 
 ## Important permissions and limitations
 
