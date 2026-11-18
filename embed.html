@@ -1360,7 +1360,7 @@
       children.appendChild(e);
     });
     if(selectedTable){
-      selectedTable.classList.add("ishr-table-only");
+      selectedTable.classList.add("ishr-table-only","table-scroll");
       const labelsByType={
         "events-table":["Year","Development","Mandate"],
         "affected-table":["Mandate","HRC session","GA81","GA82","GA83","Focus","Core group","Regional group"],
@@ -1389,19 +1389,61 @@
   document.documentElement.classList.remove("ishr-embed-pending");
   document.documentElement.classList.add("ishr-embed-ready");
   window.dispatchEvent(new Event("resize"));
-  if(window.parent!==window){
-    const notify=()=>window.parent.postMessage({
-      type:"ishr-chart-height",
-      chart:window.ISHR_EMBED_CHART,
-      height:Math.ceil(document.documentElement.scrollHeight)+4
-    },"*");
-    if(window.ResizeObserver) new ResizeObserver(notify).observe(root);
-    window.addEventListener("load",notify);
-    window.addEventListener("message",e=>{
-      if(e.source===window.parent && e.data && e.data.type==="ishr-chart-measure") notify();
-    });
-    notify();
+  // Height messaging is initialised below, after content selection and redraw.
+})();
+</script>
+<style id="un80-embed-autoheight-css">
+  html, body {
+    margin:0;
+    height:auto;
+    max-width:100%;
+    overflow-x:hidden;
   }
+  body { display:flow-root; }
+  .ishr-viz svg, .ishr-viz canvas, .ishr-viz img {
+    max-width:100%;
+  }
+  .ishr-viz .table-scroll,
+  .ishr-viz .iv-scroll:not(.ishr-table-only){
+    max-width:100%;
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+  }
+</style>
+<script id="un80-embed-autoheight-js">
+(function(){
+  if(window.parent === window) return;
+  var last = 0;
+  function sendHeight(force){
+    var h = Math.ceil(document.body.getBoundingClientRect().height);
+    if(!Number.isFinite(h) || h < 1) return;
+    if(force || h !== last){
+      last=h;
+      window.parent.postMessage({
+        type:"un80-embed-height",
+        chart:window.ISHR_EMBED_CHART,
+        height:h
+      },"*");
+    }
+  }
+  window.addEventListener("load",function(){sendHeight(true);});
+  window.addEventListener("resize",function(){
+    requestAnimationFrame(function(){sendHeight(false);});
+  });
+  if("ResizeObserver" in window){
+    var observer = new ResizeObserver(function(){sendHeight(false);});
+    observer.observe(document.body);
+  }
+  document.addEventListener("toggle",function(){sendHeight(true);},true);
+  window.addEventListener("message",function(event){
+    if(event.source!==window.parent || !event.data) return;
+    if(event.data.type!=="un80-embed-measure"
+       && event.data.type!=="ishr-chart-measure") return;
+    // Allow D3's ResizeObservers to redraw after an accordion opens.
+    window.dispatchEvent(new Event("resize"));
+    requestAnimationFrame(function(){sendHeight(true);});
+  });
+  sendHeight(true);
 })();
 </script>
 </body>
