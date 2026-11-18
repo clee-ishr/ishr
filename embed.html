@@ -853,9 +853,9 @@
       {name:"Human Rights Council",idx:1,c:"var(--l-hrc)",top:32,bottom:187,domain:[80,145],ticks:[80,100,120,140]},
       {name:"General Assembly",idx:2,c:"var(--l-ga)",top:252,bottom:409,domain:[30,55],ticks:[30,35,40,45,50,55]}
     ];
-    // COVID-19 pandemic band, including the full reporting years 2020–2023.
+    // COVID-19 pandemic band: mid-2020 to mid-2023, Human Rights Council only.
     // Draw the highlight behind the Human Rights Council panel only.
-    const pandemicStart=x(2019.5), pandemicEnd=x(2023.5);
+    const pandemicStart=x(2020.5), pandemicEnd=x(2023.5);
     svg.append("rect").attr("class","iv-pandemic-band")
       .attr("x",pandemicStart).attr("y",series[0].top)
       .attr("width",pandemicEnd-pandemicStart)
@@ -888,15 +888,21 @@
       s.tracer=pointG.append("circle").attr("r",5).attr("fill",s.c).attr("stroke","#fff")
         .attr("stroke-width",2).style("opacity",0);
     });
-    // Place the explanation inside the HRC highlight, clear of the 2021–22 line dip.
+    // Put the label in the gap below the HRC plot to guarantee clearance from the data line.
+    // A short leader ties it to the shaded 2020.5–2023.5 interval; the GA panel stays clear.
+    const pandemicCentre=x(2022);
+    svg.append("line").attr("class","iv-pandemic-leader")
+      .attr("x1",pandemicCentre).attr("x2",pandemicCentre)
+      .attr("y1",series[0].bottom+2).attr("y2",series[0].bottom+8)
+      .attr("stroke","#7a2948").attr("stroke-width",1.2)
+      .attr("pointer-events","none");
     const pandemicNote=svg.append("text").attr("class","iv-pandemic-note")
-      .attr("x",x(2021.5)).attr("y",compact?72:83).attr("text-anchor","middle")
+      .attr("x",pandemicCentre).attr("y",207).attr("text-anchor","middle")
       .attr("fill","#7a2948").style("font-size",compact?"10px":"11px")
       .style("font-weight",600).style("pointer-events","none");
-    (compact?["COVID-19 pandemic","Fewer country","visit reports","2020–2023"]:
-      ["Fewer country visit reports","during COVID-19 pandemic","2020–2023"]).forEach((line,k)=>{
-      pandemicNote.append("tspan").attr("x",x(2021.5))
-        .attr("dy",k?"1.35em":0).text(line);
+    ["Fewer country visit reports","during COVID-19 pandemic"].forEach((line,k)=>{
+      pandemicNote.append("tspan").attr("x",pandemicCentre)
+        .attr("dy",k?"1.3em":0).text(line);
     });
     svg.append("g").attr("class","axis").attr("transform",`translate(0,${series[1].bottom})`)
       .call(d3.axisBottom(x).tickValues(compact?[2014,2016,2018,2020,2022,2025]:[2014,2016,2018,2020,2022,2024,2025])
