@@ -1204,7 +1204,14 @@
   if(selected.length || selectedTable || recommendationNodes.length){
     const children=document.createDocumentFragment();
     styles.forEach(e=>children.appendChild(e));
-    selected.forEach(e=>children.appendChild(e));
+    selected.forEach(e=>{
+      // In the WordPress embed, the clusters data table is rendered in the
+      // parent page's native <details> so its expanded height stays flexible.
+      if(window.ISHR_EMBED_CHART==="clusters"){
+        e.querySelector("details.iv-data")?.remove();
+      }
+      children.appendChild(e);
+    });
     if(selectedTable){
       selectedTable.classList.add("ishr-table-only");
       const labelsByType={
