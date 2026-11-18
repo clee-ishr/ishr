@@ -223,6 +223,15 @@
   .ishr-viz .tl-head.lab-sp{display:none}
 }
 
+/* Keep the HRC60–HRC63 and Total columns equal on all screen sizes. */
+.ishr-viz #ishr-t-cuts{
+  width:100%;
+  min-width:0;
+  table-layout:fixed;
+}
+.ishr-viz #ishr-t-cuts th:first-child{width:26%}
+.ishr-viz #ishr-t-cuts thead th:not(:first-child){width:14.8%}
+
 /* Reports-cut table fits a narrow iframe without horizontal scrolling. */
 .ishr-viz .iv-cut-head-short{display:none}
 @media (max-width:720px){
@@ -318,7 +327,7 @@
 /* ===== Visual refresh, November 2026 — editorial HTML left untouched ===== */
 .ishr-viz{
   --ink:#162855;--muted:#58667b;--rule:#e1e7ef;--soft:#f6f8fb;
-  --soft2:#e7edf5;--l-hrc:#1684a7;--l-ga:#574eb5;
+  --soft2:#e7edf5;--l-hrc:#e30d54;--l-ga:#1b7fc4;
   --s4:#162855;--s3:#496ec1;--s1:#9fb9e7;
   --desc:#246bc0;--end:#d79718;--racs:#167d72;
   color:#202a3c;line-height:1.55;
@@ -844,6 +853,15 @@
       {name:"Human Rights Council",idx:1,c:"var(--l-hrc)",top:32,bottom:187,domain:[80,145],ticks:[80,100,120,140]},
       {name:"General Assembly",idx:2,c:"var(--l-ga)",top:252,bottom:409,domain:[30,55],ticks:[30,35,40,45,50,55]}
     ];
+    // COVID-19 pandemic band, including the full reporting years 2020–2023.
+    // Draw it first, behind both panel grids and series.
+    const pandemicStart=x(2019.5), pandemicEnd=x(2023.5);
+    svg.append("rect").attr("class","iv-pandemic-band")
+      .attr("x",pandemicStart).attr("y",series[0].top)
+      .attr("width",pandemicEnd-pandemicStart)
+      .attr("height",series[1].bottom-series[0].top)
+      .attr("fill","#f4e6ec").attr("opacity",0.75)
+      .attr("pointer-events","none");
     const paths=[],pointG=svg.append("g").attr("class","iv-dual-points").style("pointer-events","none");
     series.forEach((s,i)=>{
       s.y=d3.scaleLinear().domain(s.domain).range([s.bottom,s.top]);
@@ -854,12 +872,7 @@
         .attr("x1",margin.l).attr("x2",w-margin.r).attr("y1",d=>s.y(d)).attr("y2",d=>s.y(d));
       grp.append("g").attr("class","axis").attr("transform",`translate(${margin.l},0)`)
         .call(d3.axisLeft(s.y).tickValues(s.ticks).tickSize(0).tickPadding(8)).select(".domain").remove();
-      if (i===0) {
-        const note=grp.append("text").attr("class","lbl-m").attr("text-anchor","middle")
-          .attr("x",x(2021.5)).attr("y",s.y(compact?81:112)).style("font-size",compact?"11px":"12px");
-        (compact?["fewer country visit","reports during","COVID-19 pandemic"]:["fewer country visit reports","during COVID-19 pandemic"]).forEach((t,k)=>
-          note.append("tspan").attr("x",x(2021.5)).attr("dy",k?"1.25em":0).text(t));
-      }
+
       const path=grp.append("path").datum(reports).attr("fill","none").attr("stroke",s.c)
         .attr("stroke-width",3).attr("stroke-linecap","round").attr("stroke-linejoin","round")
         .attr("d",d3.line().x(d=>x(d[0])).y(d=>s.y(d[s.idx])).curve(d3.curveMonotoneX));
@@ -874,6 +887,16 @@
       });
       s.tracer=pointG.append("circle").attr("r",5).attr("fill",s.c).attr("stroke","#fff")
         .attr("stroke-width",2).style("opacity",0);
+    });
+    // Position the pandemic label in the clear gap between the two panels.
+    const pandemicNote=svg.append("text").attr("class","iv-pandemic-note")
+      .attr("x",x(2021.5)).attr("y",207).attr("text-anchor","middle")
+      .attr("fill","#7a2948").style("font-size",compact?"10px":"11px")
+      .style("font-weight",600).style("pointer-events","none");
+    (compact?["COVID-19 · 2020–23","Fewer visit reports"]:
+      ["COVID-19 pandemic · 2020–2023","Fewer country visit reports"]).forEach((line,k)=>{
+      pandemicNote.append("tspan").attr("x",x(2021.5))
+        .attr("dy",k?"1.35em":0).text(line);
     });
     svg.append("g").attr("class","axis").attr("transform",`translate(0,${series[1].bottom})`)
       .call(d3.axisBottom(x).tickValues(compact?[2014,2016,2018,2020,2022,2025]:[2014,2016,2018,2020,2022,2024,2025])
