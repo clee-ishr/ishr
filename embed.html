@@ -222,6 +222,42 @@
   .ishr-viz .tl-row .lab{grid-column:1/-1;margin-top:.5em}
   .ishr-viz .tl-head.lab-sp{display:none}
 }
+
+/* Reports-cut table fits a narrow iframe without horizontal scrolling. */
+.ishr-viz .iv-cut-head-short{display:none}
+@media (max-width:720px){
+  .ishr-viz .iv-cut-head-full{display:none}
+  .ishr-viz .iv-cut-head-short{display:inline}
+  .ishr-viz .iv-cut-scroll{overflow-x:hidden;max-width:100%}
+  .ishr-viz #ishr-t-cuts{
+    width:100%;
+    max-width:100%;
+    min-width:0;
+    table-layout:fixed;
+    border-collapse:collapse;
+    margin-top:0
+  }
+  .ishr-viz #ishr-t-cuts th,
+  .ishr-viz #ishr-t-cuts td{
+    box-sizing:border-box;
+    min-width:0;
+    padding:.42em .12em;
+    white-space:normal;
+    overflow-wrap:anywhere;
+    text-align:center
+  }
+  .ishr-viz #ishr-t-cuts thead th{font-size:10px;line-height:1.2}
+  .ishr-viz #ishr-t-cuts tbody th{
+    font-size:11px;
+    line-height:1.3;
+    font-weight:600;
+    text-align:left
+  }
+  .ishr-viz #ishr-t-cuts tbody td{font-size:12px}
+  .ishr-viz #ishr-t-cuts th:first-child{width:26%;text-align:left}
+  .ishr-viz #ishr-t-cuts thead th:not(:first-child){width:14.8%}
+}
+
 @media (prefers-reduced-motion:reduce){
   .ishr-viz *{transition:none !important;animation:none !important}
 }
@@ -456,9 +492,9 @@
 <h3 id="ishr-cuts">How many General Assembly reports have been cut?</h3>
 <p>The reductions adopted during HRC60, HRC61, HRC62 and HRC63 have resulted in fewer reports to the General Assembly across three sessions.</p>
 <figure class="iv-chart">
-  <div class="iv-scroll">
+  <div class="iv-scroll iv-cut-scroll">
     <table class="iv-cut" id="ishr-t-cuts">
-      <thead><tr><th scope="col" style="text-align:left">General Assembly session</th><th scope="col">Reports cut during HRC60</th><th scope="col">Reports cut during HRC61</th><th scope="col">Reports cut during HRC62</th><th scope="col">Reports cut during HRC63</th><th scope="col">Total</th></tr></thead>
+      <thead><tr><th scope="col" aria-label="General Assembly session" style="text-align:left"><span class="iv-cut-head-full">General Assembly session</span><span class="iv-cut-head-short" aria-hidden="true">GA session</span></th><th scope="col" aria-label="Reports cut during HRC60"><span class="iv-cut-head-full">Reports cut during HRC60</span><span class="iv-cut-head-short" aria-hidden="true">HRC60</span></th><th scope="col" aria-label="Reports cut during HRC61"><span class="iv-cut-head-full">Reports cut during HRC61</span><span class="iv-cut-head-short" aria-hidden="true">HRC61</span></th><th scope="col" aria-label="Reports cut during HRC62"><span class="iv-cut-head-full">Reports cut during HRC62</span><span class="iv-cut-head-short" aria-hidden="true">HRC62</span></th><th scope="col" aria-label="Reports cut during HRC63"><span class="iv-cut-head-full">Reports cut during HRC63</span><span class="iv-cut-head-short" aria-hidden="true">HRC63</span></th><th scope="col" aria-label="Total"><span class="iv-cut-head-full">Total</span><span class="iv-cut-head-short" aria-hidden="true">Total</span></th></tr></thead>
       <tbody></tbody>
     </table>
   </div>
