@@ -34,7 +34,9 @@ These heights are **starting values**, not measured guarantees. Check the publis
 |---|---|---:|
 | mandates | Number of thematic mandates, 2014–2026 | 475 |
 | reporting | HRC and General Assembly reports | 505 |
-| renewals | Renewed mandates with reduced reporting | 490 |
+| renewals | Renewed mandates with reduced reporting | 570 |
+| affected-table | Mandates whose reporting obligations were reduced | 1450 |
+| unaffected-table | Mandates without reporting reductions | 1220 |
 | cuts | General Assembly reports cut by session | 510 |
 | roadmap | Reports cut compared with Roadmap indicative range | 490 |
 | clusters | Reporting cuts by thematic cluster | 540 |
