@@ -241,10 +241,10 @@
   .ishr-viz .iv-chart-title{font-size:1.08rem}
   .ishr-viz #ishr-grid .tl-row{min-width:520px;grid-template-columns:repeat(6,minmax(4.3rem,1fr)) 4.5rem}
 }
-/* Roadmap figure: match the supplied dark, overlapping-band reference. */
-.ishr-viz .iv-chart--roadmap{background:#0c1121;border-color:#0c1121;box-shadow:none}
-.ishr-viz .iv-chart--roadmap .iv-chart-title{color:#f1f4fc}
-.ishr-viz .iv-chart--roadmap .iv-src{color:#b1b9cb}
+/* Roadmap uses the same white editorial card palette as the other charts. */
+.ishr-viz .iv-chart--roadmap{background:#ffffff;border-color:var(--rule);box-shadow:0 5px 20px rgba(14,33,96,.035)}
+.ishr-viz .iv-chart--roadmap .iv-chart-title{color:var(--ink)}
+.ishr-viz .iv-chart--roadmap .iv-src{color:var(--muted)}
 .ishr-viz #ishr-c-roadmap{max-width:900px;overflow-x:auto;-webkit-overflow-scrolling:touch}
 /* Expanded six-year timetable: larger and easier-to-tap year cells. */
 @media (min-width:641px){
@@ -285,7 +285,6 @@
     <li><i class="iv-sw iv-sw--dot" style="background:var(--accent)"></i>Merger or termination</li>
   </ul>
   <div id="ishr-c-mandates" role="group" aria-label="Step chart of thematic mandates by year: 2014 39, 2015 41, 2016 43, 2017 to 2020 44, 2021 and 2022 45, 2023 to 2025 46, 2026 44."></div>
-  <p class="iv-src">2026 figure as of October 2026, after HRC63. Both the 2025 merger and the 2026 termination are reflected in the 2026 figure.</p>
 </figure>
 <h4>New, merged and discontinued mandates since 2014</h4>
 <div class="iv-scroll">
@@ -295,8 +294,7 @@
 <h3>How has thematic reporting to the General Assembly and Human Rights Council changed since 2014?</h3>
 <p>There has been a <strong>36% increase in Special Procedures reporting to the General Assembly</strong>, rising from 36 reports in 2014 to 49 reports in 2025. These totals cover all Special Procedures, including the country mandates that report to the Assembly. Most of the growth came before 2018, when the total reached 46; since then it has been broadly stable. The increase reflects the growth in the number of mandates, as well as the fact that individual mandates may be required to present more than one report to the General Assembly in a given year.</p>
 <figure class="iv-chart">
-  <p class="iv-chart-title">Number of reports presented by all Special Procedures to the Human Rights Council and the General Assembly</p>
-  <p class="iv-sub">Totals include country mandates. The Council figures also include country visit reports, which are not presented to the General Assembly. The two panels use different scales.</p>
+  <p class="iv-chart-title">Number of reports presented by Special Procedures to the Human Rights Council and the General Assembly</p>
   <div id="ishr-c-reports" role="group" aria-label="Line chart, 2014 to 2025. Reports presented to the Human Rights Council: 135, 134, 134, 137, 135, 136, 134, 89, 89, 126, 133, 118. Reports presented to the General Assembly: 36, 38, 40, 39, 46, 46, 48, 50, 46, 48, 48, 49."></div>
 </figure>
 <details class="iv-data">
@@ -325,7 +323,7 @@
     <li><i class="iv-sw" style="background:#f39ab8"></i>Merged or terminated</li>
     <li><i class="iv-sw" style="background:var(--soft2);outline:1px solid var(--muted)"></i>Reporting maintained</li>
   </ul>
-  <p class="iv-sub">Each square is one mandate up for renewal. Totals include the Working Group on Arbitrary Detention and the Working Group on Enforced or Involuntary Disappearances, which do not submit written reports to the General Assembly. Hover over or tab to a square to see the mandate.</p>
+  <p class="iv-sub">Each square is one mandate up for renewal. Totals include the Working Group on Arbitrary Detention and the Working Group on Enforced or Involuntary Disappearances, which do not submit written reports to the General Assembly.</p>
   <div id="ishr-c-renewals" role="group" aria-label="Mandates up for renewal whose General Assembly reporting was reduced, merged or ended. HRC60: 2 of 8, one reduced and one merged. HRC61: 5 of 10. HRC62: 4 of 8, three reduced and one terminated. HRC63: 2 of 7."></div>
 </figure>
 <p>In addition, at HRC60 in September 2025, as an efficiency measure, the Council decided to reduce the periodicity of reporting by the Special Rapporteur on the human rights to safe drinking water and sanitation. In this instance, the reduction was aligned with the mandate holder’s participation in the UN Water Conference. As a result, there will be no reports to the General Assembly in 2026 and 2028, when the Conference takes place, while reports will be submitted in 2025 and 2027.</p>
@@ -683,7 +681,7 @@
     const step=x(2015)-x(2014);
     const hit=svg.selectAll("rect.hit").data(yearData).join("rect").attr("class","hit")
       .attr("x",d=>x(d.y)-step/2).attr("width",step).attr("y",m.t).attr("height",h-m.b-m.t).attr("fill","transparent");
-    bindTip(hit,d=>`<b>${d.y}${d.y===2026?" (as of October)":""}: ${d.v} mandates</b>`+d.ev.map(e=>`<br>${e.k}: ${e.m}`).join(""));
+    bindTip(hit,d=>`<b>${d.y}${d.y===2026?" (as of November)":""}: ${d.v} mandates</b>`+d.ev.map(e=>`<br>${e.k}: ${e.m}`).join(""));
     hit.on("mouseenter.track focus.track",(e,d)=>{
       guide.attr("x1",x(d.y)).attr("x2",x(d.y)).style("opacity",1);
       hDot.attr("cx",x(d.y)).attr("cy",y(d.v)).style("opacity",1);
@@ -721,7 +719,7 @@
       if (i===0) {
         const note=grp.append("text").attr("class","lbl-m").attr("text-anchor","middle")
           .attr("x",x(2021.5)).attr("y",s.y(compact?81:112)).style("font-size",compact?"11px":"12px");
-        (compact?["COVID-19"]:["COVID-19:","fewer visits"]).forEach((t,k)=>
+        (compact?["fewer country visit","reports during","COVID-19 pandemic"]:["fewer country visit reports","during COVID-19 pandemic"]).forEach((t,k)=>
           note.append("tspan").attr("x",x(2021.5)).attr("dy",k?"1.25em":0).text(t));
       }
       const path=grp.append("path").datum(reports).attr("fill","none").attr("stroke",s.c)
@@ -847,7 +845,7 @@
     const x=d3.scaleLinear().domain([0,21]).range([m.l,W-m.r]);
     const svg=d3.select(el).append("svg").attr("width",W).attr("height",H)
       .attr("viewBox",`0 0 ${W} ${H}`);
-    const ink="#0c1121", muted="#b1b9cb", pink="#ff3d81";
+    const ink="#162855", muted="#58667b", pink="#d63362";
     const segs=[
       {s:"GA81 (2026)",k:"GA81",v:5,c:"#4e6dc2",t:"#f7f9ff"},
       {s:"GA82 (2027)",k:"GA82",v:9,c:"#7f9de8",t:ink},
@@ -868,7 +866,7 @@
     svg.append("text").attr("x",(x(9)+x(15))/2).attr("y",35)
       .attr("text-anchor","middle").attr("fill",muted)
       .style("font-size","13px").style("font-weight",500)
-      .text("Roadmap pace, GA81–83: 9 to 15");
+      .text("Roadmap range, GA81–83: 9 to 15");
 
     const g=svg.selectAll("g.road-seg").data(segs).join("g").attr("class","road-seg");
     const rects=g.append("rect")
@@ -968,29 +966,43 @@
         .tickSize(0).tickPadding(8)).select(".domain").remove();
   });
 
-  /* ---------- Core groups: horizontal comparison ---------- */
-  const regs=[{k:"Cross-regional",c:"var(--ishr-blue)"},{k:"WEOG",c:"var(--ishr-pink)"},{k:"African Group",c:"var(--ishr-navy)"}];
+  /* ---------- Core groups: 13-square interactive waffle ---------- */
+  const regs=[
+    {k:"Cross-regional",c:"var(--ishr-blue)"},
+    {k:"WEOG",c:"var(--ishr-pink)"},
+    {k:"African Group",c:"var(--ishr-navy)"}
+  ];
   responsive("ishr-c-groups",(el,w)=>{
-    const h=167,labW=w<360?103:132,right=82;
-    const x=d3.scaleLinear().domain([0,6]).range([labW,w-right]);
-    const svg=d3.select(el).append("svg").attr("width",w).attr("height",h);
-    const g=svg.selectAll("g.reg").data(regs).join("g").attr("class","reg")
-      .attr("transform",(d,i)=>`translate(0,${i*53})`);
-    g.append("text").attr("class","lbl-b").attr("x",0).attr("y",36)
-      .style("font-size",w<380?"12px":"13px").text(d=>d.k);
-    g.each(function(r){
-      const list=affected.filter(a=>a.reg===r.k);
-      d3.select(this).append("rect").attr("x",x(0)).attr("y",18)
-        .attr("width",x(6)-x(0)).attr("height",26).attr("rx",4).attr("fill","#f1f4f9");
-      const bar=d3.select(this).append("rect").datum({r,list})
-        .attr("x",x(0)).attr("y",18).attr("width",x(list.length)-x(0)).attr("height",26)
-        .attr("rx",4).attr("fill",r.c);
-      bindTip(bar,d=>`<b>${d.r.k}: ${d.list.length} mandates</b>`+d.list.map(a=>"<br>"+a.m).join(""));
-      reveal(el,()=>bar.attr("width",0),()=>bar.transition().duration(600)
-        .delay(regs.indexOf(r)*170).ease(d3.easeCubicOut)
-        .attr("width",x(list.length)-x(0)));
-      d3.select(this).append("text").attr("class","lbl-b").attr("x",w-right+9)
-        .attr("y",36).style("font-size","12.5px").text(`${list.length} of ${affected.length}`);
+    const items=regs.flatMap(r=>affected.filter(a=>a.reg===r.k)
+      .map(a=>({reg:r.k,c:r.c,mandate:a.m,core:a.core,hrc:a.hrc})));
+    const cols=w<410?5:7, gap=w<410?8:12, margin=9;
+    const size=Math.min(56,Math.floor((w-2*margin-(cols-1)*gap)/cols));
+    const rows=Math.ceil(items.length/cols);
+    const gridW=cols*size+(cols-1)*gap, left=(w-gridW)/2;
+    const legendTop=rows*(size+gap)+21;
+    const compact=w<480;
+    const h=legendTop+(compact?80:31);
+    const svg=d3.select(el).append("svg")
+      .attr("width",w).attr("height",h)
+      .attr("viewBox",`0 0 ${w} ${h}`)
+      .attr("role","group")
+      .attr("aria-label","Core groups of 13 affected mandates. Each square represents one mandate.");
+    const sq=svg.selectAll("rect.core-cell").data(items).join("rect")
+      .attr("class","core-cell")
+      .attr("x",(d,i)=>left+(i%cols)*(size+gap))
+      .attr("y",(d,i)=>Math.floor(i/cols)*(size+gap)+7)
+      .attr("width",size).attr("height",size).attr("rx",6)
+      .attr("fill",d=>d.c).attr("stroke","#fff").attr("stroke-width",1.5);
+    bindTip(sq,d=>`<b>${d.mandate}</b><br><b>Core group:</b> ${d.core}<br><b>Regional category:</b> ${d.reg}`);
+    popIn(el,sq,(d,i)=>i*45);
+    regs.forEach((r,i)=>{
+      const count=items.filter(d=>d.reg===r.k).length;
+      const x=compact?12:12+i*(w/3),y=legendTop+(compact?i*25:0);
+      svg.append("rect").attr("x",x).attr("y",y-11).attr("width",12).attr("height",12)
+        .attr("rx",2).attr("fill",r.c);
+      svg.append("text").attr("class","lbl-b").attr("x",x+19).attr("y",y)
+        .style("font-size",compact?"12.5px":"12.5px")
+        .text(`${r.k}: ${count} of ${items.length}`);
     });
   });
 
@@ -1000,7 +1012,7 @@
   const scen = [
     {id:"annual", name:"Annual reporting", color:"var(--annual)", yrs: () => years},
     {id:"targeted", name:"One targeted cut per renewal", color:"var(--written)", yrs: () => years.filter(y => !state.skip.includes(y))},
-    {id:"biennial", name:"Indefinite biennial reporting", color:"var(--accent)", yrs: () => [1, 3, 5]}
+    {id:"biennial", name:"Biennial reporting", color:"var(--accent)", yrs: () => [1, 3, 5]}
   ];
   const grid = d3.select("#ishr-grid");
   const head = grid.append("div").attr("class", "tl-row").attr("aria-hidden", "true");
@@ -1037,7 +1049,7 @@
     svg.append("text").attr("class", "lbl-m").attr("x", x(3) + 6).attr("y", m.t + 10).text("Renewal");
     svg.append("text").attr("class", "lbl-m").attr("x", m.l).attr("y", 16)
       .style("font-size", "12.5px").text("Cumulative written reports");
-    const line = d3.line().x(d => x(d.x)).y(d => y(d.v)).curve(d3.curveStepAfter);
+    const line = d3.line().x(d => x(d.x)).y(d => y(d.v)).curve(d3.curveLinear);
     const off = {annual:-6, targeted:0, biennial:8};
     scen.forEach(s => {
       const pts = cum(s), n = pts[6].v, pct = Math.round((1 - n / 6) * 100);
