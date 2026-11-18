@@ -816,7 +816,7 @@
       .attr("fill",d=>d.ev[0].k==="New"?"var(--written)":"var(--accent)")
       .attr("stroke","#fff").attr("stroke-width",2.5).style("pointer-events","none");
     const labels=svg.append("g").style("pointer-events","none");
-    [{yr:2014,v:39,dx:13,dy:27},{yr:2023,v:46,dx:0,dy:-16},{yr:2026,v:44,dx:-13,dy:-16}]
+    [{yr:2014,v:39,dx:13,dy:27},{yr:2023,v:46,dx:0,dy:-16},{yr:2026,v:44,dx:-13,dy:30}]
       .forEach(a=>labels.append("text").attr("class","lbl-b")
         .attr("x",x(a.yr)+a.dx).attr("y",y(a.v)+a.dy).attr("text-anchor","middle")
         .style("font-size","14px").text(a.v));
