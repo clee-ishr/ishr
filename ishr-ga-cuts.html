@@ -201,7 +201,7 @@
 .ishr-viz .gridline{stroke:#e8edf4}
 .ishr-viz .lbl{fill:var(--ink)}
 .ishr-viz .lbl-b{fill:var(--ink);font-weight:700}
-.ishr-viz .mark{cursor:help;transition:opacity .15s,filter .15s}
+.ishr-viz .mark{cursor:pointer;transition:opacity .15s,filter .15s}
 .ishr-viz .mark:focus-visible{outline:none;stroke:#182955;stroke-width:2.6px}
 .ishr-viz .iv-tip{border:1px solid #dce3ee;border-radius:9px;padding:.65em .85em;box-shadow:0 12px 30px rgba(14,33,96,.17);max-width:min(20rem,calc(100vw - 24px));line-height:1.5;word-break:normal}
 .ishr-viz .iv-tip b{font-weight:700}
@@ -459,6 +459,7 @@
 </ul>
 <p>Therefore, out of the 44 thematic Special Procedures mandates, <strong>41 submit written reports to the General Assembly</strong>. Two report orally only, and one does not report at all.</p>
 <figure class="iv-chart">
+  <p class="iv-chart-title">44 thematic mandates, one square each</p>
   <ul class="iv-legend">
     <li><i class="iv-sw" style="background:var(--accent)"></i>Written report, already affected (12)</li>
     <li><i class="iv-sw" style="background:var(--written)"></i>Written report, not affected (29)</li>
@@ -466,7 +467,6 @@
     <li><i class="iv-sw iv-sw--none"></i>No report to the General Assembly (1)</li>
   </ul>
   <div id="ishr-waffle" style="max-width:34rem"></div>
-  <p class="iv-src">Each square is one thematic Special Procedures mandate. Hover over or tab to a square to see the mandate.</p>
 </figure>
 <div class="iv-note">
   <p><strong>12 of the 41 thematic mandates that report in writing to the General Assembly (29%) have already been affected</strong> by reduced reporting periodicity or merger — close to three in ten. In addition, the mandate on leprosy has been terminated.</p>
@@ -966,43 +966,46 @@
         .tickSize(0).tickPadding(8)).select(".domain").remove();
   });
 
-  /* ---------- Core groups: 13-square interactive waffle ---------- */
+  /* ---------- Core groups: one colour-coded row per regional grouping ---------- */
   const regs=[
     {k:"Cross-regional",c:"var(--ishr-blue)"},
     {k:"WEOG",c:"var(--ishr-pink)"},
     {k:"African Group",c:"var(--ishr-navy)"}
   ];
   responsive("ishr-c-groups",(el,w)=>{
-    const items=regs.flatMap(r=>affected.filter(a=>a.reg===r.k)
-      .map(a=>({reg:r.k,c:r.c,mandate:a.m,core:a.core,hrc:a.hrc})));
-    const cols=w<410?5:7, gap=w<410?8:12, margin=9;
-    const size=Math.min(56,Math.floor((w-2*margin-(cols-1)*gap)/cols));
-    const rows=Math.ceil(items.length/cols);
-    const gridW=cols*size+(cols-1)*gap, left=(w-gridW)/2;
-    const legendTop=rows*(size+gap)+21;
-    const compact=w<480;
-    const h=legendTop+(compact?80:31);
+    const narrow=w<465;
+    const labelW=narrow?89:140;
+    const countW=narrow?24:60;
+    const gap=narrow?5:10;
+    const square=Math.max(22,Math.min(46,
+      Math.floor((w-labelW-countW-18-gap*5)/6)));
+    const rowH=square+17;
+    const h=3*rowH+7;
     const svg=d3.select(el).append("svg")
       .attr("width",w).attr("height",h)
       .attr("viewBox",`0 0 ${w} ${h}`)
       .attr("role","group")
-      .attr("aria-label","Core groups of 13 affected mandates. Each square represents one mandate.");
-    const sq=svg.selectAll("rect.core-cell").data(items).join("rect")
-      .attr("class","core-cell")
-      .attr("x",(d,i)=>left+(i%cols)*(size+gap))
-      .attr("y",(d,i)=>Math.floor(i/cols)*(size+gap)+7)
-      .attr("width",size).attr("height",size).attr("rx",6)
-      .attr("fill",d=>d.c).attr("stroke","#fff").attr("stroke-width",1.5);
-    bindTip(sq,d=>`<b>${d.mandate}</b><br><b>Core group:</b> ${d.core}<br><b>Regional category:</b> ${d.reg}`);
-    popIn(el,sq,(d,i)=>i*45);
-    regs.forEach((r,i)=>{
-      const count=items.filter(d=>d.reg===r.k).length;
-      const x=compact?12:12+i*(w/3),y=legendTop+(compact?i*25:0);
-      svg.append("rect").attr("x",x).attr("y",y-11).attr("width",12).attr("height",12)
-        .attr("rx",2).attr("fill",r.c);
-      svg.append("text").attr("class","lbl-b").attr("x",x+19).attr("y",y)
-        .style("font-size",compact?"12.5px":"12.5px")
-        .text(`${r.k}: ${count} of ${items.length}`);
+      .attr("aria-label","Core groups: Cross-regional six mandates, WEOG five mandates, African Group two mandates.");
+    regs.forEach((reg,r)=>{
+      const items=affected.filter(a=>a.reg===reg.k);
+      const g=svg.append("g").attr("transform",`translate(0,${r*rowH})`);
+      g.append("text").attr("class","lbl-b")
+        .attr("x",4).attr("y",square/2+11)
+        .style("font-size",narrow?"11.5px":"13px")
+        .text(reg.k);
+      const sq=g.selectAll("rect.core-cell").data(items).join("rect")
+        .attr("class","core-cell")
+        .attr("x",(d,i)=>labelW+i*(square+gap))
+        .attr("y",5).attr("width",square).attr("height",square)
+        .attr("rx",4).attr("fill",reg.c)
+        .attr("stroke","#fff").attr("stroke-width",1.5);
+      bindTip(sq,d=>`<b>${d.m}</b><br><b>Core group countries:</b> ${d.core}`);
+      g.append("text").attr("class","lbl-b")
+        .attr("x",labelW+6*(square+gap)-gap+7)
+        .attr("y",square/2+11)
+        .style("font-size","12px")
+        .text(narrow?String(items.length):`${items.length} mandates`);
+      popIn(el,sq,(d,i)=>r*150+i*35);
     });
   });
 
