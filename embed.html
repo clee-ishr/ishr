@@ -190,9 +190,8 @@
 .ishr-viz .iv-tag--bi{background:#fbe3ea;color:#a80e39}
 .ishr-viz .iv-tag--named{background:#e3ebf8;color:#1f4fa8}
 
-.ishr-viz .tl-row{display:grid;grid-template-columns:minmax(8rem,12rem) repeat(6,minmax(0,1fr)) 4.5em;gap:.4em;align-items:center;margin-bottom:.45em}
+.ishr-viz .tl-row{display:grid;grid-template-columns:minmax(8rem,12rem) repeat(6,minmax(0,1fr));gap:.4em;align-items:center;margin-bottom:.45em}
 .ishr-viz .tl-row .lab{font-size:.9em;line-height:1.3}
-.ishr-viz .tl-row .tot{font-weight:600;text-align:right;font-size:.95em}
 .ishr-viz .tl-head{font-size:.8em;color:var(--muted);text-align:center}
 .ishr-viz .tl-head.gap,.ishr-viz .slot.gap{margin-left:.5em}
 .ishr-viz .slot{height:2.4em;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:.8em;border:0;padding:0;line-height:1}
@@ -218,7 +217,7 @@
   .ishr-viz .iv-cut{min-width:0;font-size:.8em}
   .ishr-viz .iv-cut th,.ishr-viz .iv-cut td{padding:.5em .3em}
   .ishr-viz .iv-cut tbody th{white-space:normal}
-  .ishr-viz .tl-row{grid-template-columns:repeat(6,minmax(0,1fr)) 3.5em}
+  .ishr-viz .tl-row{grid-template-columns:repeat(6,minmax(0,1fr))}
   .ishr-viz .tl-row .lab{grid-column:1/-1;margin-top:.5em}
   .ishr-viz .tl-head.lab-sp{display:none}
 }
@@ -1264,7 +1263,6 @@
   const head = grid.append("div").attr("class", "tl-row").attr("aria-hidden", "true");
   head.append("div").attr("class", "tl-head lab-sp");
   years.forEach(y => head.append("div").attr("class", "tl-head" + (y === 4 ? " gap" : "")).text((window.innerWidth<500?"Y":"Year ") + y));
-  head.append("div").attr("class", "tl-head").style("text-align", "right").text("Reports");
   const rows = grid.selectAll(".tl-row.s").data(scen).join("div").attr("class", "tl-row s");
   rows.append("div").attr("class", "lab").text(d => d.name);
   rows.each(function(s){
@@ -1281,7 +1279,6 @@
         });
       }
     });
-    row.append("div").attr("class", "tot");
   });
   function cum(s){
     const on = s.yrs(); let c = 0;
@@ -1325,7 +1322,6 @@
         else if (s.id === "biennial") el.attr("aria-pressed", String(isOn)).attr("aria-label", "Year " + d.y + ": " + (isOn ? "report" : "skipped") + ". Activate to reverse the full biennial reporting sequence.");
         else el.attr("aria-label", "Year " + d.y + ": " + (isOn ? "report" : "no report"));
       });
-      d3.select(this).select(".tot").text(on.length + " of 6");
     });
     redrawCum();
   }
