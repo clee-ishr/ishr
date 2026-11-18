@@ -852,7 +852,7 @@
   const pill = (sel, f) => sel.append("span").attr("class", "pill").style("background", fColor[f]).style("color", fText[f]).text(f);
   const atb = d3.select("#ishr-t-affected tbody");
   affected.forEach(d => {
-    const tr = atb.append("tr");
+    const tr = atb.append("tr").datum(d);
     tr.append("td").text(d.m);
     tr.append("td").text(d.hrc);
     ["GA81", "GA82", "GA83"].forEach(g => {
@@ -866,7 +866,7 @@
   });
   const utb = d3.select("#ishr-t-unaffected tbody");
   unaffected.forEach(d => {
-    const tr = utb.append("tr");
+    const tr = utb.append("tr").datum(d);
     tr.append("td").text(d.m);
     tr.append("td").text(d.hrc);
     pill(tr.append("td"), d.f);
