@@ -1,6 +1,6 @@
 # Embedding the ISHR interactive charts in WordPress
 
-The original `ishr-ga-cuts.html` contains the complete article and is left unchanged.
+`ishr-ga-cuts.html` contains the complete article and is updated alongside `embed.html` when charts change.
 
 Use **GitHub Pages**, not the `github.com` source-code URL or `raw.githubusercontent.com` URL. The new `embed.html` provides a chart-only view, so the article text can remain in WordPress.
 
@@ -20,7 +20,7 @@ Paste the following into a **Custom HTML** block *where you want a chart to appe
   title="Special Procedures reporting cuts compared with the Roadmap"
   src="https://clee-ishr.github.io/ishr/embed.html?chart=roadmap"
   width="100%"
-  height="490"
+  height="330"
   loading="lazy"
   style="display:block;width:100%;max-width:100%;border:0;"
 ></iframe>
@@ -28,28 +28,28 @@ Paste the following into a **Custom HTML** block *where you want a chart to appe
 
 ## Chart addresses and suggested iframe heights
 
-These heights are **starting values**, not measured guarantees. Check the published page on mobile and adjust them to prevent cropping or excessive whitespace.
+These heights are **desktop starting values**, not measured guarantees. The complete WordPress HTML uses CSS breakpoints at 720px and 420px to allocate more height to wrapped tables and recommendations. Cross-origin iframe content cannot auto-resize without approved code in WordPress, so confirm no clipping or excess space in a published preview.
 
 | chart key | Chart | Suggested iframe height |
 |---|---|---:|
-| mandates | Number of thematic mandates, 2014–2026 | 475 |
-| events-table | New, merged and discontinued mandates since 2014 | 690 |
-| reporting | HRC and General Assembly reports | 505 |
-| renewals | Renewed mandates with reduced reporting | 570 |
-| affected-table | Mandates whose reporting obligations were reduced | 1450 |
-| unaffected-table | Mandates without reporting reductions | 1220 |
-| cuts | General Assembly reports cut by session | 510 |
-| roadmap | Reports cut compared with Roadmap indicative range | 490 |
-| clusters | Reporting cuts by thematic cluster | 540 |
-| core-groups | Core groups involved in reporting changes | 560 |
-| periodicity | Reporting periodicity: six-year interactive comparison | 800 |
-| waffle | Mandates affected, illustrated as a waffle chart | 510 |
-| recommendations | Interactive five-point recommendations checklist and progress bar | 1060 |
+| mandates | Number of thematic mandates, 2014–2026 | 405 |
+| events-table | New, merged and discontinued mandates since 2014 | 670 |
+| reporting | HRC and General Assembly reports | 550 |
+| renewals | Renewed mandates with reduced reporting | 490 |
+| affected-table | Mandates whose reporting obligations were reduced | 1600 |
+| unaffected-table | Mandates without reporting reductions | 1450 |
+| cuts | General Assembly reports cut by session | 335 |
+| roadmap | Reports cut compared with Roadmap indicative range | 330 |
+| clusters | Reporting cuts by thematic cluster | 530 |
+| core-groups | Core groups involved in reporting changes | 325 |
+| periodicity | Reporting periodicity: six-year interactive comparison | 710 |
+| waffle | Mandates affected, illustrated as a waffle chart | 340 |
+| recommendations | Interactive five-point recommendations checklist and progress bar | 840 |
 | all | All nine charts only (for preview, not recommended as one iframe) | 4400 |
 
 Example: `https://clee-ishr.github.io/ishr/embed.html?chart=reporting`
 
-**WordPress has 13 iframe placements** in the full article: nine chart views, three data-table views and one recommendations checklist. The two mandate-status tables use the keys `affected-table` and `unaffected-table`. The historical events table uses `events-table`.
+**WordPress has 13 iframe placements** in the full article: nine chart views, three data-table views and one recommendations checklist. The three data tables use responsive card layouts below 720px to avoid horizontal scrolling. The two mandate-status tables use the keys `affected-table` and `unaffected-table`. The historical events table uses `events-table`.
 
 ## Important permissions and limitations
 
