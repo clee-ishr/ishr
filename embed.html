@@ -591,7 +591,7 @@
 </ol>
 <figure class="iv-chart">
   <p class="iv-chart-title">Which General Assembly sessions get a written report?</p>
-  <p class="iv-sub">Illustrative example: the mandate is renewed after year 3. Select a year in the middle row to choose which session to skip in each renewal period. Under biennial language there is no choice.</p>
+  <p class="iv-sub">Illustrative example: the mandate is renewed after year 3. In the middle row, select which year to skip in each renewal period. In the biennial row, click any year to reverse the entire alternating reporting pattern. The total stays at 3 of 6.</p>
   <div id="ishr-grid"></div>
   <div id="ishr-c-cum" style="margin-top:1.75em" role="img" aria-label="Cumulative written reports over six years: 6 with annual reporting, 4 with one targeted cut per renewal, 3 with indefinite biennial reporting."></div>
 </figure>
@@ -1254,11 +1254,11 @@
 
   /* Timeline: annual vs targeted vs biennial */
   const years = [1, 2, 3, 4, 5, 6];
-  const state = {skip: [2, 5]};
+  const state = {skip: [2, 5], biennialFirst: 1};
   const scen = [
     {id:"annual", name:"Annual reporting", color:"var(--annual)", yrs: () => years},
     {id:"targeted", name:"One targeted cut per renewal", color:"var(--written)", yrs: () => years.filter(y => !state.skip.includes(y))},
-    {id:"biennial", name:"Biennial reporting", color:"var(--accent)", yrs: () => [1, 3, 5]}
+    {id:"biennial", name:"Biennial reporting", color:"var(--accent)", yrs: () => years.filter(y => y % 2 === state.biennialFirst)}
   ];
   const grid = d3.select("#ishr-grid");
   const head = grid.append("div").attr("class", "tl-row").attr("aria-hidden", "true");
@@ -1270,8 +1270,16 @@
   rows.each(function(s){
     const row = d3.select(this);
     years.forEach(y => {
-      const el = row.append(s.id === "targeted" ? "button" : "div").attr("class", "slot" + (y === 4 ? " gap" : "")).datum({s, y});
-      if (s.id === "targeted") el.attr("type", "button").on("click", () => { state.skip[y <= 3 ? 0 : 1] = y; update(); });
+      const el = row.append(s.id === "annual" ? "div" : "button").attr("class", "slot" + (y === 4 ? " gap" : "")).datum({s, y});
+      if (s.id === "targeted") {
+        el.attr("type", "button").on("click", () => { state.skip[y <= 3 ? 0 : 1] = y; update(); });
+      } else if (s.id === "biennial") {
+        // Clicking any year reverses all six positions, preserving alternate-year reporting.
+        el.attr("type", "button").on("click", () => {
+          state.biennialFirst = state.biennialFirst === 1 ? 0 : 1;
+          update(); // Also redraws the cumulative D3 line from the revised sequence.
+        });
+      }
     });
     row.append("div").attr("class", "tot");
   });
@@ -1314,6 +1322,7 @@
         const isOn = on.includes(d.y);
         const el = d3.select(this).classed("on", isOn).classed("off", !isOn).style("background", isOn ? s.color : null).text(window.innerWidth<500 ? (isOn ? "✓" : "–") : (isOn ? "Report" : "Skipped"));
         if (s.id === "targeted") el.attr("aria-pressed", String(!isOn)).attr("aria-label", "Year " + d.y + ": " + (isOn ? "report, select to skip this year instead" : "skipped"));
+        else if (s.id === "biennial") el.attr("aria-pressed", String(isOn)).attr("aria-label", "Year " + d.y + ": " + (isOn ? "report" : "skipped") + ". Activate to reverse the full biennial reporting sequence.");
         else el.attr("aria-label", "Year " + d.y + ": " + (isOn ? "report" : "no report"));
       });
       d3.select(this).select(".tot").text(on.length + " of 6");
