@@ -770,12 +770,12 @@
       {name:"General Assembly",idx:2,c:"var(--l-ga)",top:252,bottom:409,domain:[30,55],ticks:[30,35,40,45,50,55]}
     ];
     // COVID-19 pandemic band, including the full reporting years 2020–2023.
-    // Draw it first, behind both panel grids and series.
+    // Draw the highlight behind the Human Rights Council panel only.
     const pandemicStart=x(2019.5), pandemicEnd=x(2023.5);
     svg.append("rect").attr("class","iv-pandemic-band")
       .attr("x",pandemicStart).attr("y",series[0].top)
       .attr("width",pandemicEnd-pandemicStart)
-      .attr("height",series[1].bottom-series[0].top)
+      .attr("height",series[0].bottom-series[0].top)
       .attr("fill","#f4e6ec").attr("opacity",0.75)
       .attr("pointer-events","none");
     const paths=[],pointG=svg.append("g").attr("class","iv-dual-points").style("pointer-events","none");
@@ -804,13 +804,13 @@
       s.tracer=pointG.append("circle").attr("r",5).attr("fill",s.c).attr("stroke","#fff")
         .attr("stroke-width",2).style("opacity",0);
     });
-    // Position the pandemic label in the clear gap between the two panels.
+    // Place the explanation inside the HRC highlight, clear of the 2021–22 line dip.
     const pandemicNote=svg.append("text").attr("class","iv-pandemic-note")
-      .attr("x",x(2021.5)).attr("y",207).attr("text-anchor","middle")
+      .attr("x",x(2021.5)).attr("y",compact?72:83).attr("text-anchor","middle")
       .attr("fill","#7a2948").style("font-size",compact?"10px":"11px")
       .style("font-weight",600).style("pointer-events","none");
-    (compact?["COVID-19 · 2020–23","Fewer visit reports"]:
-      ["COVID-19 pandemic · 2020–2023","Fewer country visit reports"]).forEach((line,k)=>{
+    (compact?["COVID-19 pandemic","Fewer country","visit reports","2020–2023"]:
+      ["Fewer country visit reports","during COVID-19 pandemic","2020–2023"]).forEach((line,k)=>{
       pandemicNote.append("tspan").attr("x",x(2021.5))
         .attr("dy",k?"1.35em":0).text(line);
     });
