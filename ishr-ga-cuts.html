@@ -32,7 +32,7 @@
   --soft:#f2f4f8; --soft2:#e2e6ef; --rule:#d8dce6; --muted:#5a6276; --bg:#ffffff; --on-fill:#ffffff;
   --s1:#b8c6ea; --s2:#7d97d8; --s3:#3c5fb6; --s4:#0e2160;
   --desc:#1f4fa8; --end:#e5a50a; --racs:#0f7a6b;
-  --l-hrc:#3a9bd6; --l-ga:#0e2160;
+  --l-hrc:#e30d54; --l-ga:#1b7fc4;
   --ishr-pink:#e30d54; --ishr-blue:#1b7fc4; --ishr-navy:#0e2160;
   --h60:#2a78d6; --h61:#eb6834; --h62:#1baf7a; --h63:#6250d6;
   font-family:inherit; font-variant-numeric:tabular-nums lining-nums;
@@ -144,6 +144,24 @@
 }
 
 .ishr-viz .iv-mx{border-collapse:collapse;width:100%;min-width:44rem;font-size:.88em;margin-top:.5em}
+/* Keyboard-accessible sortable mandate-table headings. */
+.ishr-viz .iv-mx thead th[aria-sort]{vertical-align:middle}
+.ishr-viz .iv-mx .iv-sort-button{
+  appearance:none;border:0;background:transparent;padding:0;margin:0;
+  display:inline-flex;align-items:center;gap:.35em;
+  font:inherit;font-weight:700;line-height:1.35;color:inherit;
+  text-align:left;white-space:normal;cursor:pointer
+}
+.ishr-viz .iv-mx .iv-sort-button::after{
+  content:"↕";display:inline-block;opacity:.55;font-size:.9em;
+  white-space:nowrap;margin-left:.12em
+}
+.ishr-viz .iv-mx th[aria-sort="ascending"] .iv-sort-button::after{content:"▲";opacity:1;color:var(--ishr-blue)}
+.ishr-viz .iv-mx th[aria-sort="descending"] .iv-sort-button::after{content:"▼";opacity:1;color:var(--ishr-blue)}
+.ishr-viz .iv-mx .iv-sort-button:focus-visible{
+  outline:2px solid var(--ishr-blue);outline-offset:3px;border-radius:2px
+}
+
 .ishr-viz .iv-mx th,.ishr-viz .iv-mx td{text-align:left;padding:.5em .6em .5em 0;border-bottom:1px solid var(--rule);vertical-align:top}
 .ishr-viz .iv-mx thead th{color:var(--ink);font-weight:600;border-bottom:2px solid var(--ink);vertical-align:bottom}
 .ishr-viz .iv-mx thead th.grp{border-bottom:1px solid var(--rule);text-align:center}
@@ -245,7 +263,7 @@
 .ishr-viz .iv-chart--roadmap{background:#ffffff;border-color:var(--rule);box-shadow:0 5px 20px rgba(14,33,96,.035)}
 .ishr-viz .iv-chart--roadmap .iv-chart-title{color:var(--ink)}
 .ishr-viz .iv-chart--roadmap .iv-src{color:var(--muted)}
-.ishr-viz #ishr-c-roadmap{max-width:900px;overflow-x:auto;-webkit-overflow-scrolling:touch}
+.ishr-viz #ishr-c-roadmap{width:100%;max-width:900px;overflow-x:hidden}
 /* Expanded six-year timetable: larger and easier-to-tap year cells. */
 @media (min-width:641px){
   .ishr-viz #ishr-grid .tl-row{
@@ -339,7 +357,7 @@
 <h4>Mandates whose reporting obligations have been reduced</h4>
 <div class="iv-scroll">
   <table class="iv-mx" id="ishr-t-affected">
-    <thead><tr><th scope="col" rowspan="2">Title / Mandate</th><th scope="col" rowspan="2">HRC session</th><th scope="colgroup" colspan="3" class="c grp">Report cut</th><th scope="col" rowspan="2">Focus</th><th scope="col" rowspan="2">Core Group</th><th scope="col" rowspan="2">Regional group of core group</th></tr><tr><th scope="col" class="c">GA81</th><th scope="col" class="c">GA82</th><th scope="col" class="c">GA83</th></tr></thead>
+    <thead><tr><th scope="col" rowspan="2">Mandate</th><th scope="col" rowspan="2">HRC session</th><th scope="colgroup" colspan="3" class="c grp">Report cut</th><th scope="col" rowspan="2">Focus</th><th scope="col" rowspan="2">Core Group</th><th scope="col" rowspan="2">Regional group of core group</th></tr><tr><th scope="col" class="c">GA81</th><th scope="col" class="c">GA82</th><th scope="col" class="c">GA83</th></tr></thead>
     <tbody></tbody>
   </table>
 </div>
@@ -813,6 +831,63 @@
     tr.append("td").text(d.core);
   });
 
+
+  /* ---------- Sortable mandate tables (including grouped GA report-cut columns) ---------- */
+  function initialiseMandateSorting(id, columns, groupedHeader){
+    const table=document.getElementById(id);
+    if(!table || !table.tHead || !table.tBodies.length) return;
+    const headerRows=Array.from(table.tHead.rows);
+    // The affected table's first row spans two rows; GA81–GA83 are on row two.
+    const headers=groupedHeader
+      ? [headerRows[0].cells[0],headerRows[0].cells[1],
+         headerRows[1].cells[0],headerRows[1].cells[1],headerRows[1].cells[2],
+         headerRows[0].cells[3],headerRows[0].cells[4],headerRows[0].cells[5]]
+      : Array.from(headerRows[0].cells);
+    if(headers.length!==columns.length) return;
+    const body=table.tBodies[0];
+    const entries=Array.from(body.rows).map((row,index)=>({
+      row,index,data:d3.select(row).datum()
+    }));
+    const collator=new Intl.Collator("en",{numeric:true,sensitivity:"base"});
+    let active=-1, direction=1;
+    headers.forEach((th,index)=>{
+      if(!th)return;
+      const textLabel=th.textContent.trim();
+      const button=document.createElement("button");
+      button.type="button";
+      button.className="iv-sort-button";
+      button.textContent=textLabel;
+      button.setAttribute("aria-label","Sort by "+textLabel);
+      button.setAttribute("title","Sort by "+textLabel);
+      th.textContent="";
+      th.appendChild(button);
+      th.setAttribute("aria-sort","none");
+      button.addEventListener("click",()=>{
+        direction=active===index ? -direction : 1;
+        active=index;
+        headers.forEach(h=>h.setAttribute("aria-sort","none"));
+        th.setAttribute("aria-sort",direction===1?"ascending":"descending");
+        const ordered=entries.slice().sort((a,b)=>{
+          const av=columns[index](a.data), bv=columns[index](b.data);
+          const cmp=typeof av==="number" && typeof bv==="number"
+            ? av-bv : collator.compare(String(av??""),String(bv??""));
+          return direction*cmp || a.index-b.index;
+        });
+        ordered.forEach(({row})=>body.appendChild(row));
+      });
+    });
+  }
+  initialiseMandateSorting("ishr-t-affected",[
+    d=>d.m,d=>d.hrc,
+    d=>Number(d.ga.includes("GA81")),
+    d=>Number(d.ga.includes("GA82")),
+    d=>Number(d.ga.includes("GA83")),
+    d=>d.f,d=>d.core,d=>d.reg
+  ],true);
+  initialiseMandateSorting("ishr-t-unaffected",[
+    d=>d.m,d=>d.hrc,d=>d.f,d=>d.core
+  ],false);
+
   /* ---------- Reports cut: table with shading ---------- */
   const hrcS = ["HRC60", "HRC61", "HRC62", "HRC63"];
   const gaS = [{s:"GA81", yr:"2026"}, {s:"GA82", yr:"2027"}, {s:"GA83", yr:"2028"}];
@@ -840,11 +915,12 @@
 
   /* ---------- Roadmap: reference layout with range BEHIND stacked GA bars ---------- */
   responsive("ishr-c-roadmap",(el,w)=>{
-    // Keep the screenshot's proportions; allow horizontal scrolling on narrow screens.
+    // Keep reference proportions, but scale the SVG to fit narrow screens without scrolling.
     const W=Math.max(490,w), H=246, m={l:18,r:20};
     const x=d3.scaleLinear().domain([0,21]).range([m.l,W-m.r]);
-    const svg=d3.select(el).append("svg").attr("width",W).attr("height",H)
-      .attr("viewBox",`0 0 ${W} ${H}`);
+    const svg=d3.select(el).append("svg").attr("width","100%")
+      .attr("viewBox",`0 0 ${W} ${H}`)
+      .style("width","100%").style("height","auto");
     const ink="#162855", muted="#58667b", pink="#d63362";
     const segs=[
       {s:"GA81 (2026)",k:"GA81",v:5,c:"#4e6dc2",t:"#f7f9ff"},
@@ -1061,7 +1137,7 @@
         .attr("stroke-linejoin", "round").attr("stroke-linecap", "round");
       svg.append("circle").attr("cx", x(6)).attr("cy", y(n)).attr("r", 5).attr("fill", s.color).attr("stroke", "var(--bg)").attr("stroke-width", 2);
       svg.append("text").attr("class", "lbl").attr("x", x(6) + 10).attr("y", y(n) + 4 + off[s.id])
-        .text(narrow ? n + (s.id === "annual" ? "" : " (−" + pct + "%)") : n + " reports" + (s.id === "annual" ? ", annual" : ", −" + pct + "%"));
+        .text(narrow ? n + (s.id === "annual" ? "" : " (−" + pct + "%)") : n + " reports" + (s.id === "annual" ? "" : ", −" + pct + "%"));
     });
   });
   function update(){
