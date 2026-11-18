@@ -1235,10 +1235,18 @@
   document.documentElement.classList.remove("ishr-embed-pending");
   document.documentElement.classList.add("ishr-embed-ready");
   window.dispatchEvent(new Event("resize"));
-  if(window.ResizeObserver && window.parent!==window){
-    const notify=()=>window.parent.postMessage({type:"ishr-chart-height",chart:window.ISHR_EMBED_CHART,height:Math.ceil(document.documentElement.scrollHeight)},"*");
-    new ResizeObserver(notify).observe(root);
+  if(window.parent!==window){
+    const notify=()=>window.parent.postMessage({
+      type:"ishr-chart-height",
+      chart:window.ISHR_EMBED_CHART,
+      height:Math.ceil(document.documentElement.scrollHeight)+4
+    },"*");
+    if(window.ResizeObserver) new ResizeObserver(notify).observe(root);
     window.addEventListener("load",notify);
+    window.addEventListener("message",e=>{
+      if(e.source===window.parent && e.data && e.data.type==="ishr-chart-measure") notify();
+    });
+    notify();
   }
 })();
 </script>
