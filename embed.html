@@ -33,7 +33,7 @@
 </style>
 <script>
 (function(){
-  const charts={"mandates":["ishr-c-mandates"],"reporting":["ishr-c-reports"],"renewals":["ishr-c-renewals"],"cuts":["ishr-t-cuts"],"roadmap":["ishr-c-roadmap"],"clusters":["ishr-c-clusters"],"core-groups":["ishr-c-groups"],"periodicity":["ishr-grid","ishr-c-cum"],"waffle":["ishr-waffle"]};
+  const charts={"mandates":["ishr-c-mandates"],"reporting":["ishr-c-reports"],"renewals":["ishr-c-renewals"],"cuts":["ishr-t-cuts"],"roadmap":["ishr-c-roadmap"],"clusters":["ishr-c-clusters"],"core-groups":["ishr-c-groups"],"periodicity":["ishr-grid","ishr-c-cum"],"waffle":["ishr-waffle"],"affected-table":["ishr-t-affected"],"unaffected-table":["ishr-t-unaffected"]};
   const requested=(new URLSearchParams(location.search)).get("chart")||"roadmap";
   window.ISHR_EMBED_CHART=Object.hasOwn(charts,requested)||requested==="all"?requested:"roadmap";
   window.ISHR_EMBED_TARGETS=window.ISHR_EMBED_CHART==="all"?Object.values(charts).flat():charts[window.ISHR_EMBED_CHART];
@@ -1159,14 +1159,17 @@
   const figures=Array.from(root.querySelectorAll("figure.iv-chart"));
   const targets=window.ISHR_EMBED_TARGETS||[];
   const selected=window.ISHR_EMBED_CHART==="all"?figures:figures.filter(f=>targets.some(id=>f.contains(document.getElementById(id))));
+  const selectedTable = ["affected-table","unaffected-table"].includes(window.ISHR_EMBED_CHART)
+    ? document.getElementById(targets[0])?.closest(".iv-scroll") : null;
   const tip=root.querySelector("#ishr-tip");
-  if(selected.length){
+  if(selected.length || selectedTable){
     const children=document.createDocumentFragment();
     styles.forEach(e=>children.appendChild(e));
     selected.forEach(e=>children.appendChild(e));
+    if(selectedTable)children.appendChild(selectedTable);
     if(tip)children.appendChild(tip);
     root.replaceChildren(children);
-    const heading=selected[0].querySelector(".iv-chart-title")?.textContent?.trim();
+    const heading=selectedTable ? (window.ISHR_EMBED_CHART==="affected-table" ? "Mandates whose reporting obligations have been reduced" : "Mandates without reductions in reporting") : selected[0].querySelector(".iv-chart-title")?.textContent?.trim();
     document.title=(heading||("ISHR chart: "+window.ISHR_EMBED_CHART))+" | ISHR";
   }else{
     const p=document.createElement("p");
