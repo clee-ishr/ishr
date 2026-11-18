@@ -1,0 +1,1187 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>General Assembly reporting cuts to Special Procedures mandates: an analysis</title>
+<base target="_parent">
+<style>
+  /* Base typography for the embedded page. Change the font-family to match your site. */
+  html{-webkit-text-size-adjust:100%}
+  body{margin:0;padding:0 2px 8px;background:#fff;color:#1c2333;
+       font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+       font-size:17px;line-height:1.6}
+  .page{max-width:760px;margin:0 auto}
+  h2{font-size:1.6em;line-height:1.25;color:#0e2160;margin:1.6em 0 .6em}
+  h3{font-size:1.3em;line-height:1.3;color:#0e2160;margin:1.6em 0 .5em}
+  h4{font-size:1.08em;line-height:1.35;color:#0e2160;margin:1.4em 0 .5em}
+  p{margin:0 0 1em}
+  ol,ul{padding-left:1.4em;margin:0 0 1em}
+  li{margin:0 0 .5em}
+  a{color:#1b7fc4}
+  table{font-size:.92em}
+</style>
+
+<style id="ishr-embed-layout">
+  html.ishr-embed-pending body{visibility:hidden}
+  html.ishr-embed-ready body{margin:0;padding:6px 4px 12px;background:#fff}
+  html.ishr-embed-ready .ishr-viz{margin:0 auto;max-width:1160px;width:100%}
+  html.ishr-embed-ready .ishr-viz .iv-chart{margin:0!important;width:100%;max-width:100%}
+  html.ishr-embed-ready .ishr-viz .iv-chart + .iv-chart{margin-top:22px!important}
+  html.ishr-embed-ready .ishr-viz .iv-tip{z-index:9999}
+  @media(max-width:620px){html.ishr-embed-ready body{padding:2px}}
+</style>
+<script>
+(function(){
+  const charts={"mandates":["ishr-c-mandates"],"reporting":["ishr-c-reports"],"renewals":["ishr-c-renewals"],"cuts":["ishr-t-cuts"],"roadmap":["ishr-c-roadmap"],"clusters":["ishr-c-clusters"],"core-groups":["ishr-c-groups"],"periodicity":["ishr-grid","ishr-c-cum"],"waffle":["ishr-waffle"]};
+  const requested=(new URLSearchParams(location.search)).get("chart")||"roadmap";
+  window.ISHR_EMBED_CHART=Object.hasOwn(charts,requested)||requested==="all"?requested:"roadmap";
+  window.ISHR_EMBED_TARGETS=window.ISHR_EMBED_CHART==="all"?Object.values(charts).flat():charts[window.ISHR_EMBED_CHART];
+  document.documentElement.classList.add("ishr-embed-pending");
+})();
+</script>
+</head>
+<body>
+<div class="page">
+<!-- ISHR: General Assembly reporting cuts to Special Procedures mandates. Paste into a Custom HTML block. -->
+<div class="ishr-viz">
+<style>
+.ishr-viz{
+  --ink:#0e2160; --accent:#e30d54; --written:#1b7fc4; --oral:#8cc4e8; --none:#8a90a0; --annual:#9aa1b2;
+  --soft:#f2f4f8; --soft2:#e2e6ef; --rule:#d8dce6; --muted:#5a6276; --bg:#ffffff; --on-fill:#ffffff;
+  --s1:#b8c6ea; --s2:#7d97d8; --s3:#3c5fb6; --s4:#0e2160;
+  --desc:#1f4fa8; --end:#e5a50a; --racs:#0f7a6b;
+  --l-hrc:#3a9bd6; --l-ga:#0e2160;
+  --ishr-pink:#e30d54; --ishr-blue:#1b7fc4; --ishr-navy:#0e2160;
+  --h60:#2a78d6; --h61:#eb6834; --h62:#1baf7a; --h63:#6250d6;
+  font-family:inherit; font-variant-numeric:tabular-nums lining-nums;
+}
+.ishr-viz *,.ishr-viz *::before,.ishr-viz *::after{box-sizing:border-box}
+.ishr-viz svg{display:block;overflow:visible;max-width:none}
+.ishr-viz svg text{font-family:inherit}
+.ishr-viz button,.ishr-viz input{font:inherit}
+.ishr-viz :focus-visible{outline:2px solid var(--written);outline-offset:3px}
+
+.ishr-viz .iv-note{border-left:4px solid var(--accent);background:var(--soft);padding:1em 1.25em;margin:1.5em 0}
+.ishr-viz .iv-note p:last-child{margin-bottom:0}
+
+.ishr-viz .iv-chart{margin:1.75em 0 2.25em}
+.ishr-viz .iv-chart-title{font-weight:600;color:var(--ink);margin:0 0 .25em}
+.ishr-viz .iv-sub,.ishr-viz .iv-src{font-size:.88em;color:var(--muted);margin:0 0 .9em}
+.ishr-viz .iv-src{margin:.75em 0 0}
+.ishr-viz .iv-legend{display:flex;flex-wrap:wrap;gap:.4em 1.2em;font-size:.88em;color:var(--muted);margin:0 0 .9em;padding:0;list-style:none}
+.ishr-viz .iv-legend li{display:flex;align-items:center;gap:.45em;margin:0;padding:0}
+.ishr-viz .iv-legend li::before{content:none}
+.ishr-viz .iv-legend button{all:unset;display:flex;align-items:center;gap:.45em;cursor:pointer;font:inherit}
+.ishr-viz .iv-legend button[aria-pressed="true"]{color:var(--ink);font-weight:600}
+.ishr-viz .iv-sw{width:.8em;height:.8em;border-radius:2px;display:inline-block;flex:none}
+.ishr-viz .iv-sw--none{border:2px dashed var(--none)}
+.ishr-viz .iv-sw--dot{border-radius:50%}
+.ishr-viz details.iv-data{margin-top:.75em;font-size:.9em}
+.ishr-viz details.iv-data summary{cursor:pointer;color:var(--ink)}
+.ishr-viz .iv-scroll{overflow-x:auto}
+.ishr-viz .iv-scroll table{border-collapse:collapse;margin-top:.5em;min-width:22rem;width:100%}
+.ishr-viz .iv-scroll th,.ishr-viz .iv-scroll td{text-align:left;padding:.4em .9em .4em 0;border-bottom:1px solid var(--rule);vertical-align:top}
+.ishr-viz .iv-scroll .n{text-align:right}
+
+.ishr-viz .iv-stats{display:flex;flex-wrap:wrap;gap:.75em;margin:0 0 1.25em}
+.ishr-viz .iv-stats div{background:var(--soft);padding:.7em 1em;flex:1 1 8rem}
+.ishr-viz .iv-stats b{display:block;font-size:1.6em;line-height:1.1;color:var(--ink)}
+.ishr-viz .iv-stats span{font-size:.85em;color:var(--muted)}
+
+.ishr-viz .axis text{fill:var(--muted);font-size:12px}
+.ishr-viz .axis line,.ishr-viz .axis path{stroke:var(--rule)}
+.ishr-viz .gridline{stroke:var(--rule);stroke-width:1}
+.ishr-viz .lbl{font-size:13px;fill:currentColor}
+.ishr-viz .lbl-m{font-size:12px;fill:var(--muted)}
+.ishr-viz .lbl-b{font-size:13px;font-weight:600;fill:currentColor}
+.ishr-viz .mark{cursor:pointer;transition:opacity .2s}
+.ishr-viz .mark:focus{outline:none;stroke:currentColor;stroke-width:2}
+.ishr-viz .faded{opacity:.18}
+.ishr-viz .iv-tip{position:fixed;z-index:1000;pointer-events:none;background:#fff;color:#1c2333;border:1px solid var(--rule);padding:.5em .7em;font-size:.85em;line-height:1.4;max-width:17rem;border-radius:6px;opacity:0;transition:opacity .12s;top:0;left:0;box-shadow:0 4px 14px rgba(14,33,96,.12)}
+.ishr-viz .iv-tip b{color:var(--ink)}
+
+.ishr-viz .iv-two{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,30rem),1fr));gap:1em 2.5em;align-items:start}
+.ishr-viz .iv-strip{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.4em;margin:1em 0 .5em;max-width:34rem}
+.ishr-viz .iv-strip div{border-radius:5px;padding:.55em .4em;text-align:center;font-size:.85em;line-height:1.3}
+.ishr-viz .iv-strip .on{background:var(--written);color:var(--on-fill)}
+.ishr-viz .iv-strip .off{border:2px dashed var(--none);color:var(--muted)}
+.ishr-viz .iv-strip b{display:block}
+
+.ishr-viz .iv-filters{display:flex;flex-wrap:wrap;gap:.5em;margin:0 0 1em}
+.ishr-viz .iv-filters button{font-size:.9em;padding:.45em .85em;border:1px solid var(--rule);background:transparent;color:inherit;border-radius:999px;cursor:pointer;line-height:1.3}
+.ishr-viz .iv-filters button[aria-pressed="true"]{background:var(--ink);color:#fff;border-color:var(--ink)}
+.ishr-viz .cell{transition:opacity .25s ease}
+.ishr-viz .cell--affected{fill:var(--accent)}
+.ishr-viz .cell--written{fill:var(--written)}
+.ishr-viz .cell--oral{fill:var(--oral)}
+.ishr-viz .cell--none{fill:transparent;stroke:var(--none);stroke-width:2;stroke-dasharray:5 4}
+.ishr-viz .cell.dim{opacity:.14}
+
+.ishr-viz .iv-lang{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,18rem),1fr));gap:1em;margin:1.25em 0}
+.ishr-viz .iv-lang article{border:1px solid var(--rule);padding:1em 1.1em;border-radius:6px}
+.ishr-viz .iv-lang h4{margin:.5em 0 .4em;color:var(--ink);font-size:1em}
+.ishr-viz .iv-lang p{font-size:.93em;margin:0}
+.ishr-viz .iv-tag{display:inline-block;font-size:.78em;padding:.15em .55em;border-radius:999px;margin:0 .3em .3em 0}
+.ishr-viz .iv-tag--bi{background:#fbe3ea;color:#a80e39}
+.ishr-viz .iv-tag--named{background:#e3ebf8;color:#1f4fa8}
+
+.ishr-viz .tl-row{display:grid;grid-template-columns:minmax(8rem,12rem) repeat(6,minmax(0,1fr)) 4.5em;gap:.4em;align-items:center;margin-bottom:.45em}
+.ishr-viz .tl-row .lab{font-size:.9em;line-height:1.3}
+.ishr-viz .tl-row .tot{font-weight:600;text-align:right;font-size:.95em}
+.ishr-viz .tl-head{font-size:.8em;color:var(--muted);text-align:center}
+.ishr-viz .tl-head.gap,.ishr-viz .slot.gap{margin-left:.5em}
+.ishr-viz .slot{height:2.4em;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:.8em;border:0;padding:0;line-height:1}
+.ishr-viz .slot.on{color:var(--on-fill)}
+.ishr-viz .slot.off{background:transparent;border:2px dashed var(--none);color:var(--muted)}
+.ishr-viz button.slot{cursor:pointer}
+.ishr-viz button.slot:hover{filter:brightness(1.08)}
+
+.ishr-viz #ishr-c-mandates{max-width:620px}
+.ishr-viz #ishr-c-reports{max-width:640px}
+.ishr-viz #ishr-c-renewals{max-width:520px}
+.ishr-viz #ishr-c-roadmap{max-width:600px}
+.ishr-viz #ishr-c-clusters{max-width:560px}
+.ishr-viz #ishr-c-groups{max-width:525px}
+.ishr-viz #ishr-c-cum{max-width:560px}
+.ishr-viz #ishr-grid{max-width:780px;width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}
+.ishr-viz #ishr-waffle{max-width:500px !important}
+.ishr-viz .iv-scroll:has(#ishr-t-events){max-width:620px}
+.ishr-viz .iv-cut{width:auto;max-width:600px}
+.ishr-viz .iv-pull{font-weight:700;color:var(--ink);border-left:4px solid var(--ink);padding:.25em 0 .25em 1.25em;margin:2em 0 0}
+
+@media (max-width:640px){
+  .ishr-viz .iv-cut{min-width:0;font-size:.8em}
+  .ishr-viz .iv-cut th,.ishr-viz .iv-cut td{padding:.5em .3em}
+  .ishr-viz .iv-cut tbody th{white-space:normal}
+  .ishr-viz .tl-row{grid-template-columns:repeat(6,minmax(0,1fr)) 3.5em}
+  .ishr-viz .tl-row .lab{grid-column:1/-1;margin-top:.5em}
+  .ishr-viz .tl-head.lab-sp{display:none}
+}
+@media (prefers-reduced-motion:reduce){
+  .ishr-viz *{transition:none !important;animation:none !important}
+}
+
+.ishr-viz .iv-mx{border-collapse:collapse;width:100%;min-width:44rem;font-size:.88em;margin-top:.5em}
+.ishr-viz .iv-mx th,.ishr-viz .iv-mx td{text-align:left;padding:.5em .6em .5em 0;border-bottom:1px solid var(--rule);vertical-align:top}
+.ishr-viz .iv-mx thead th{color:var(--ink);font-weight:600;border-bottom:2px solid var(--ink);vertical-align:bottom}
+.ishr-viz .iv-mx thead th.grp{border-bottom:1px solid var(--rule);text-align:center}
+.ishr-viz .iv-cut{border-collapse:collapse;min-width:30rem;margin-top:.5em}
+.ishr-viz .iv-cut th,.ishr-viz .iv-cut td{padding:.6em .7em;border:1px solid var(--rule);text-align:center}
+.ishr-viz .iv-cut thead th{background:var(--ishr-navy);color:#fff;font-weight:600;font-size:.88em;vertical-align:bottom}
+.ishr-viz .iv-cut tbody th{text-align:left;font-weight:600;color:var(--ink);white-space:nowrap}
+.ishr-viz .iv-cut td{font-size:1.05em;font-weight:600}
+.ishr-viz .iv-cut td.z{color:var(--muted);font-weight:400}
+.ishr-viz .iv-cut .tot{background:var(--soft)}
+.ishr-viz .iv-cut tr.total th,.ishr-viz .iv-cut tr.total td{background:var(--soft);border-top:2px solid var(--ink)}
+.ishr-viz .iv-cut tr.total td.grand{background:var(--ishr-navy);color:#fff}
+.ishr-viz .iv-mx .c{text-align:center;padding-right:0;width:3.4em}
+.ishr-viz .iv-mx .dot{display:inline-block;width:.85em;height:.85em;border-radius:50%;border:2px solid var(--rule);vertical-align:middle}
+.ishr-viz .iv-mx .dot.on{background:var(--accent);border-color:var(--accent)}
+.ishr-viz .iv-mx .pill{display:inline-block;font-size:.85em;padding:.05em .5em;border-radius:999px;white-space:nowrap}
+.ishr-viz .iv-mx tbody tr:hover{background:var(--soft)}
+.ishr-viz .iv-quote{background:var(--soft);border-left:4px solid var(--rule);padding:.9em 1.1em;margin:0 0 1em}
+.ishr-viz .iv-quote p{margin:0 0 .5em;font-style:italic}
+.ishr-viz .iv-quote footer{font-size:.88em;color:var(--muted)}
+.ishr-viz .iv-quote .iv-tag{font-style:normal}
+.ishr-viz .iv-check{list-style:none;padding:0;margin:1.25em 0}
+.ishr-viz .iv-check li{border-top:1px solid var(--rule);padding:1em 0;margin:0}
+.ishr-viz .iv-check li::before{content:none}
+.ishr-viz .iv-check li:last-child{border-bottom:1px solid var(--rule)}
+.ishr-viz .iv-check label{display:grid;grid-template-columns:1.6em 1fr;gap:.75em;cursor:pointer;font-weight:inherit}
+.ishr-viz .iv-check input{width:1.2em;height:1.2em;margin:.25em 0 0;accent-color:var(--ink)}
+.ishr-viz .iv-score{display:flex;align-items:center;gap:1em;flex-wrap:wrap;background:var(--soft);padding:.9em 1.25em;margin-top:1em}
+.ishr-viz .iv-meter{flex:1 1 10rem;height:.6em;background:var(--rule);border-radius:999px;overflow:hidden}
+.ishr-viz .iv-meter i{display:block;height:100%;width:0;background:var(--ink);transition:width .3s ease}
+.ishr-viz .iv-score p{margin:0;font-weight:600}
+.ishr-viz .iv-reset{font-size:.9em;padding:.4em .85em;border:1px solid var(--rule);background:transparent;color:inherit;border-radius:999px;cursor:pointer}
+
+
+/* ===== Visual refresh, November 2026 — editorial HTML left untouched ===== */
+.ishr-viz{
+  --ink:#162855;--muted:#58667b;--rule:#e1e7ef;--soft:#f6f8fb;
+  --soft2:#e7edf5;--l-hrc:#1684a7;--l-ga:#574eb5;
+  --s4:#162855;--s3:#496ec1;--s1:#9fb9e7;
+  --desc:#246bc0;--end:#d79718;--racs:#167d72;
+  color:#202a3c;line-height:1.55;
+}
+.ishr-viz .iv-chart{
+  margin:1.8em 0 2.25em;padding:clamp(1rem,2.8vw,1.65rem);
+  border:1px solid var(--rule);border-radius:12px;background:var(--bg);
+  box-shadow:0 5px 20px rgba(14,33,96,.035);
+}
+.ishr-viz .iv-chart-title{font-size:clamp(1.08rem,1.5vw,1.28rem);line-height:1.35;font-weight:700;letter-spacing:-.012em;margin:0 0 .35em;color:var(--ink)}
+.ishr-viz .iv-sub{font-size:.88rem;line-height:1.5;margin-bottom:1.2rem}
+.ishr-viz .iv-src{line-height:1.55}
+.ishr-viz .iv-legend{column-gap:1.3em;row-gap:.55em;margin:.65rem 0 1.15rem}
+.ishr-viz .iv-legend .iv-sw{width:.9em;height:.9em;border-radius:3px}
+.ishr-viz .axis text{font-size:11.5px;fill:#637187}
+.ishr-viz .axis line{stroke:var(--rule)}
+.ishr-viz .gridline{stroke:#e8edf4}
+.ishr-viz .lbl{fill:var(--ink)}
+.ishr-viz .lbl-b{fill:var(--ink);font-weight:700}
+.ishr-viz .mark{cursor:help;transition:opacity .15s,filter .15s}
+.ishr-viz .mark:focus-visible{outline:none;stroke:#182955;stroke-width:2.6px}
+.ishr-viz .iv-tip{border:1px solid #dce3ee;border-radius:9px;padding:.65em .85em;box-shadow:0 12px 30px rgba(14,33,96,.17);max-width:min(20rem,calc(100vw - 24px));line-height:1.5;word-break:normal}
+.ishr-viz .iv-tip b{font-weight:700}
+.ishr-viz .iv-scroll{max-width:100%;overflow-x:auto;overscroll-behavior-inline:contain;-webkit-overflow-scrolling:touch}
+.ishr-viz .iv-mx{border-collapse:separate;border-spacing:0;font-size:.88em}
+.ishr-viz .iv-mx th,.ishr-viz .iv-mx td{border-bottom:1px solid var(--rule);padding:.7em .75em .7em 0;line-height:1.45}
+.ishr-viz .iv-mx thead th{border-bottom:2px solid var(--ink)}
+.ishr-viz .iv-mx .dot.on{box-shadow:0 0 0 3px rgba(227,13,84,.09)}
+.ishr-viz .iv-cut{width:100%;min-width:44rem;border-collapse:separate;border-spacing:0}
+.ishr-viz .iv-cut thead th{background:#172b5a;border:0;border-bottom:2px solid white;padding:.85em .55em;line-height:1.35}
+.ishr-viz .iv-cut thead th:first-child{border-radius:8px 0 0 0}
+.ishr-viz .iv-cut thead th:last-child{border-radius:0 8px 0 0}
+.ishr-viz .iv-cut td,.ishr-viz .iv-cut tbody th{border:0;border-bottom:1px solid var(--rule);padding:.75em .6em}
+.ishr-viz .iv-cut td[data-intensity="1"]{background:#f8e7ee}
+.ishr-viz .iv-cut td[data-intensity="2"]{background:#f6d3e0}
+.ishr-viz .iv-cut td[data-intensity="3"]{background:#efb2c9}
+.ishr-viz .iv-cut td[data-intensity="4"]{background:#e68aae}
+.ishr-viz .iv-cut .tot{background:#f1f4f9;color:var(--ink);font-weight:700}
+.ishr-viz .iv-cut tr.total td,.ishr-viz .iv-cut tr.total th{background:#edf1f7;border-top:2px solid var(--ink);font-weight:700}
+.ishr-viz .iv-cut tr.total td.grand{background:var(--ink);color:#fff}
+.ishr-viz .iv-scroll:focus-visible{outline:2px solid var(--written)}
+.ishr-viz .iv-note{background:#f4f6fa;border-left-color:var(--accent)}
+.ishr-viz .iv-filters button{transition:background .15s,color .15s,border .15s}
+.ishr-viz .iv-filters button:focus-visible{outline:2px solid var(--written);outline-offset:2px}
+.ishr-viz .iv-strip div,.ishr-viz .slot{border-radius:7px}
+.ishr-viz .iv-strip .off,.ishr-viz .slot.off{background:#fafbfd}
+.ishr-viz .slot{min-height:2.8em}
+.ishr-viz .iv-quote{border-radius:0 7px 7px 0}
+.ishr-viz .iv-data{border-top:1px solid var(--rule);padding-top:.5em}
+.ishr-viz details.iv-data summary{font-weight:600}
+.ishr-viz #ishr-c-mandates,.ishr-viz #ishr-c-reports,.ishr-viz #ishr-c-renewals,.ishr-viz #ishr-c-roadmap,
+.ishr-viz #ishr-c-clusters,.ishr-viz #ishr-c-groups,.ishr-viz #ishr-c-cum{width:100%;}
+@media(max-width:640px){
+  .ishr-viz .iv-chart{padding:1rem;border-radius:10px}
+  .ishr-viz .iv-cut{min-width:44rem!important;font-size:.86em}
+  .ishr-viz .iv-cut tbody th{white-space:nowrap}
+  .ishr-viz .iv-chart-title{font-size:1.08rem}
+  .ishr-viz #ishr-grid .tl-row{min-width:520px;grid-template-columns:repeat(6,minmax(4.3rem,1fr)) 4.5rem}
+}
+/* Roadmap figure: match the supplied dark, overlapping-band reference. */
+.ishr-viz .iv-chart--roadmap{background:#0c1121;border-color:#0c1121;box-shadow:none}
+.ishr-viz .iv-chart--roadmap .iv-chart-title{color:#f1f4fc}
+.ishr-viz .iv-chart--roadmap .iv-src{color:#b1b9cb}
+.ishr-viz #ishr-c-roadmap{max-width:900px;overflow-x:auto;-webkit-overflow-scrolling:touch}
+/* Expanded six-year timetable: larger and easier-to-tap year cells. */
+@media (min-width:641px){
+  .ishr-viz #ishr-grid .tl-row{
+    grid-template-columns:minmax(11.5rem,13rem) repeat(6,minmax(4.1rem,1fr)) minmax(4.25rem,5rem);
+    gap:.5em;
+  }
+}
+.ishr-viz #ishr-grid .slot{min-height:3.05em;padding:0 .35em;font-size:.84em;white-space:nowrap}
+.ishr-viz #ishr-grid .tl-head{white-space:nowrap}
+</style>
+
+<p>In December 2024, the General Assembly adopted resolution <a href="https://undocs.org/A/RES/79/192">79/192</a> on the working methods of the Third Committee, with the objective of ‘achiev[ing] a manageable workload for the Committee and ensur[ing] the high quality of its deliberations’. The document, ‘Implementation of General Assembly Resolution 79/192 – Elements for a Roadmap’, requested in operative paragraph 3 of the resolution, was presented and discussed, <strong>but the General Assembly never formally adopted it</strong>.</p>
+<p>Nevertheless, the Roadmap discussions established a set of guiding principles aimed at progressively reducing the number of mandates reporting to each session of the General Assembly’s Third Committee by an indicative 3 to 5 mandates per year, until the Committee’s 84th session. <strong>This would amount to a total reduction of approximately 12 to 20 reports over the 81st to 84th sessions of the General Assembly, or 9 to 15 reports over the three sessions covered by this analysis (GA81 to GA83).</strong></p>
+<p>At the same time, successive efficiency initiatives, the UN’s ongoing budgetary constraints, and the UN80 reform process have further prompted Member States to advance proposals to reduce the reporting periodicity of Special Procedures to the General Assembly.</p>
+<p>As <a href="https://ishr.ch/latest-updates/hrc61-organisations-concerned-over-impacts-of-budget-cuts-on-work-of-special-procedures/">highlighted</a> by civil society organisations, without a strategic approach that includes meaningful consultation with relevant actors and a case-by-case assessment that highlights the extraordinary nature of these measures, these developments risk diminishing the visibility of key human rights issues in New York, widening the institutional gap between the General Assembly and the Human Rights Council, and normalising this practice over the long term. <strong>Reductions in reporting are accompanied by corresponding reductions in resources allocated from the Regular Budget to Special Procedures, which are exacerbated by reductions in extra-budgetary contributions to Special Procedures mandates</strong>.</p>
+<p>The analysis below provides an overview of reductions in reporting implemented so far within the time-frame proposed by the Roadmap: General Assembly sessions 81 to 83 (2026–2028), and it considers the reductions adopted by the Council from its 60th session (HRC60) in September 2025 to its 63rd session (HRC63) in September–October 2026.</p>
+
+<h2>Main findings</h2>
+<ol>
+  <li><strong>The scale of reductions has already exceeded what was contemplated under the Roadmap.</strong> Resolutions adopted at HRC60–63 mean 19 fewer reports to GA81–83. That is above the 9 to 15 reports the Roadmap’s indicative pace implies for those three sessions, and only one short of the 20-report ceiling for its whole period to GA84. The General Assembly’s 82nd session (GA82, 2027) is most affected, with 9 fewer reports; GA81 (2026) and GA83 (2028) each have 5 fewer.</li>
+  <li><strong>What began as a workload-management exercise risks becoming a structural change to Special Procedures reporting.</strong> Several resolutions do not merely omit reporting for a specified session but establish biennial reporting, potentially halving GA reporting over successive mandate renewals. There’s no uniform language around reporting reductions. Some resolutions state the specific sessions where mandate holders are meant to report to the GA, and others just vaguely state they should be reporting biennially to the General Assembly, only to be defined by the programme budget implications (PBI) arising from the resolution.</li>
+  <li><strong>Safeguards remain inconsistent.</strong> Some resolutions preserve alternative opportunities for GA engagement or redirect savings to substantive mandate activities, while others contain no equivalent protection.</li>
+  <li><strong>Between the 60th and 63rd sessions of the Human Rights Council (HRC60–HRC63), 13 of the 33 Special Procedures mandates up for renewal (39%) saw their reporting to the General Assembly reduced, merged or ended.</strong> Eleven had their reporting periodicity reduced, one was merged and one was terminated. The share was highest at HRC61 (5 of 10) and HRC62 (4 of 8), compared with 2 of 8 at HRC60 and 2 of 7 at HRC63.</li>
+  <li><strong>States in the Western European and Others Group (WEOG) have led this reporting reduction process thus far.</strong> WEOG States led 10 of the 13 changes, either alone (5) or within cross-regional core groups that include at least one WEOG member (5).</li>
+  <li><strong>Close to three in ten thematic Special Procedures mandates</strong> that submit written reports to the General Assembly (12 of 41) have already been affected by the current initiatives to reduce reporting.</li>
+</ol>
+
+<h2>In depth analysis</h2>
+
+<h3>Overview of Special Procedures reporting to the General Assembly and the Human Rights Council since 2014</h3>
+<p>There were 39 thematic mandates in 2014 and 46 thematic mandates in 2025. <strong>As of October 2026, there are 44 mandates</strong> (following the merger of the mandates on trafficking and slavery, decided in 2025, and the termination of the mandate on leprosy in 2026), representing an <strong>increase of around 13% over 12 years.</strong></p>
+<p>Since the start of 2014, nine new thematic mandates were established; two of them were created during 2014 and are already included in that year’s count of 39. During the same period, one mandate was terminated and two thematic mandates were merged into one.</p>
+<figure class="iv-chart">
+  <p class="iv-chart-title">Number of thematic mandates, 2014 to 2026</p>
+  <ul class="iv-legend">
+    <li><i class="iv-sw iv-sw--dot" style="background:var(--written)"></i>New mandate</li>
+    <li><i class="iv-sw iv-sw--dot" style="background:var(--accent)"></i>Merger or termination</li>
+  </ul>
+  <div id="ishr-c-mandates" role="group" aria-label="Step chart of thematic mandates by year: 2014 39, 2015 41, 2016 43, 2017 to 2020 44, 2021 and 2022 45, 2023 to 2025 46, 2026 44."></div>
+  <p class="iv-src">2026 figure as of October 2026, after HRC63. Both the 2025 merger and the 2026 termination are reflected in the 2026 figure.</p>
+</figure>
+<h4>New, merged and discontinued mandates since 2014</h4>
+<div class="iv-scroll">
+  <table id="ishr-t-events"><thead><tr><th scope="col">Year</th><th scope="col">Development</th><th scope="col">Mandate</th></tr></thead><tbody></tbody></table>
+</div>
+
+<h3>How has thematic reporting to the General Assembly and Human Rights Council changed since 2014?</h3>
+<p>There has been a <strong>36% increase in Special Procedures reporting to the General Assembly</strong>, rising from 36 reports in 2014 to 49 reports in 2025. These totals cover all Special Procedures, including the country mandates that report to the Assembly. Most of the growth came before 2018, when the total reached 46; since then it has been broadly stable. The increase reflects the growth in the number of mandates, as well as the fact that individual mandates may be required to present more than one report to the General Assembly in a given year.</p>
+<figure class="iv-chart">
+  <p class="iv-chart-title">Number of reports presented by all Special Procedures to the Human Rights Council and the General Assembly</p>
+  <p class="iv-sub">Totals include country mandates. The Council figures also include country visit reports, which are not presented to the General Assembly. The two panels use different scales.</p>
+  <div id="ishr-c-reports" role="group" aria-label="Line chart, 2014 to 2025. Reports presented to the Human Rights Council: 135, 134, 134, 137, 135, 136, 134, 89, 89, 126, 133, 118. Reports presented to the General Assembly: 36, 38, 40, 39, 46, 46, 48, 50, 46, 48, 48, 49."></div>
+</figure>
+<details class="iv-data">
+  <summary>Show the data as a table</summary>
+  <div class="iv-scroll"><table id="ishr-t-reports"><thead><tr><th scope="col">Year</th><th scope="col" class="n">Number of reports presented to the Human Rights Council</th><th scope="col" class="n">Number of reports presented to the General Assembly</th></tr></thead><tbody></tbody></table></div>
+</details>
+<p class="iv-src"><em>Source: Special Procedures annual reports and OHCHR’s annual facts and figures on the Special Procedures, which cover the activities of all mandate holders. The 2021–22 dip in Council reports reflects the COVID-19 pandemic: country visits were largely suspended in 2020 and 2021, and visit reports are presented to the Council about a year after the visit.</em></p>
+<p>For example, the Special Rapporteur on contemporary forms of racism, racial discrimination, xenophobia and related intolerance presents both a thematic report and a report on the glorification of Nazism, neo-Nazism and other practices that contribute to fuelling contemporary forms of racism, racial discrimination, xenophobia and related intolerance.</p>
+<p>It is also important to note that:</p>
+<ul>
+  <li>The Working Group on Arbitrary Detention is not required to report to the General Assembly.</li>
+  <li>The Working Group on Enforced or Involuntary Disappearances and the Working Group on Discrimination against Women and Girls only present orally to the Assembly, without written reports.</li>
+  <li>Country visit reports are not presented to the General Assembly.</li>
+</ul>
+<p>The largest difference, however, comes from country visit reports, which make up around half of the reports presented to the Human Rights Council each year and are not presented to the General Assembly.</p>
+
+<h3 id="ishr-renewals">Which mandates have been affected by reductions in reporting?</h3>
+<p>The lists below identify all mandate renewals. The first list displays the mandates whose reporting requirements have been reduced to date. The second list displays the mandates that have maintained the original reporting obligations to the General Assembly and the Human Rights Council.</p>
+<div class="iv-note">
+  <p><strong>39% of mandates up for renewal between HRC60 and HRC63 saw their reporting to the General Assembly reduced, merged or ended.</strong> Of the 33 mandates concerned, 11 had their reporting periodicity reduced, one was merged and one was terminated.</p>
+</div>
+<figure class="iv-chart">
+  <p class="iv-chart-title">Mandates up for renewal, by outcome for General Assembly reporting</p>
+  <ul class="iv-legend">
+    <li><i class="iv-sw" style="background:var(--accent)"></i>Reporting reduced</li>
+    <li><i class="iv-sw" style="background:#f39ab8"></i>Merged or terminated</li>
+    <li><i class="iv-sw" style="background:var(--soft2);outline:1px solid var(--muted)"></i>Reporting maintained</li>
+  </ul>
+  <p class="iv-sub">Each square is one mandate up for renewal. Totals include the Working Group on Arbitrary Detention and the Working Group on Enforced or Involuntary Disappearances, which do not submit written reports to the General Assembly. Hover over or tab to a square to see the mandate.</p>
+  <div id="ishr-c-renewals" role="group" aria-label="Mandates up for renewal whose General Assembly reporting was reduced, merged or ended. HRC60: 2 of 8, one reduced and one merged. HRC61: 5 of 10. HRC62: 4 of 8, three reduced and one terminated. HRC63: 2 of 7."></div>
+</figure>
+<p>In addition, at HRC60 in September 2025, as an efficiency measure, the Council decided to reduce the periodicity of reporting by the Special Rapporteur on the human rights to safe drinking water and sanitation. In this instance, the reduction was aligned with the mandate holder’s participation in the UN Water Conference. As a result, there will be no reports to the General Assembly in 2026 and 2028, when the Conference takes place, while reports will be submitted in 2025 and 2027.</p>
+<div class="iv-strip" role="img" aria-label="Reports to the General Assembly in 2025 and 2027; no report in 2026 and 2028, the years of the UN Water Conference.">
+  <div class="on"><b>2025</b>Report</div>
+  <div class="off"><b>2026</b>UN Water Conference</div>
+  <div class="on"><b>2027</b>Report</div>
+  <div class="off"><b>2028</b>UN Water Conference</div>
+</div>
+<p>During the same session, the Council merged the mandates of the Special Rapporteur on contemporary forms of slavery and the Special Rapporteur on trafficking in persons into a single mandate entitled Special Rapporteur on contemporary forms of slavery and trafficking in persons.</p>
+<p>For this analysis, the merger is treated as one fewer report for each of the three relevant General Assembly sessions, as reflected in the corresponding <a href="https://hrcmeetings.ohchr.org/HRCSessions/RegularSessions/60/DL_Resolution/OralStatement_AHRC60L.8_20251002_2126.pdf">programme budget implications</a> (PBI).</p>
+
+<h4>Mandates whose reporting obligations have been reduced</h4>
+<div class="iv-scroll">
+  <table class="iv-mx" id="ishr-t-affected">
+    <thead><tr><th scope="col" rowspan="2">Title / Mandate</th><th scope="col" rowspan="2">HRC session</th><th scope="colgroup" colspan="3" class="c grp">Report cut</th><th scope="col" rowspan="2">Focus</th><th scope="col" rowspan="2">Core Group</th><th scope="col" rowspan="2">Regional group of core group</th></tr><tr><th scope="col" class="c">GA81</th><th scope="col" class="c">GA82</th><th scope="col" class="c">GA83</th></tr></thead>
+    <tbody></tbody>
+  </table>
+</div>
+
+<h4>Mandates that have not suffered reductions in periodicity of reporting</h4>
+<div class="iv-scroll">
+  <table class="iv-mx" id="ishr-t-unaffected">
+    <thead><tr><th scope="col">Mandate</th><th scope="col">Renewal session</th><th scope="col">Focus of the resolution</th><th scope="col">Core Group</th></tr></thead>
+    <tbody></tbody>
+  </table>
+</div>
+
+<h3 id="ishr-cuts">How many General Assembly reports have been cut?</h3>
+<p>The reductions adopted during HRC60, HRC61, HRC62 and HRC63 have resulted in fewer reports to the General Assembly across three sessions.</p>
+<figure class="iv-chart">
+  <div class="iv-scroll">
+    <table class="iv-cut" id="ishr-t-cuts">
+      <thead><tr><th scope="col" style="text-align:left">General Assembly session</th><th scope="col">Reports cut during HRC60</th><th scope="col">Reports cut during HRC61</th><th scope="col">Reports cut during HRC62</th><th scope="col">Reports cut during HRC63</th><th scope="col">Total</th></tr></thead>
+      <tbody></tbody>
+    </table>
+  </div>
+</figure>
+<div class="iv-note">
+  <p><strong>19 reports have been cut in total</strong> across GA81, GA82 and GA83: five in 2026, nine in 2027 and five in 2028. Six of the 19 result from the merger of the slavery and trafficking mandates and the termination of the leprosy mandate (three each).</p>
+</div>
+<figure class="iv-chart iv-chart--roadmap">
+  <p class="iv-chart-title">Total reports cut compared with the Roadmap’s indicative range</p>
+  <div id="ishr-c-roadmap" role="group" aria-label="Bar chart: 19 reports cut across GA81, GA82 and GA83 (5, 9 and 5). That is 4 above the 9 to 15 implied by the Roadmap's pace for these three sessions, and one below the 20-report ceiling for the full Roadmap period to GA84."></div>
+  <p class="iv-src">Reports cut by resolutions adopted at HRC60 to HRC63, by General Assembly session. The Roadmap’s indicative pace is 3 to 5 fewer mandates reporting per session until GA84: 9 to 15 over GA81–GA83, and 12 to 20 over the full period.</p>
+</figure>
+<p><strong>The Third Committee’s Roadmap envisaged progressive reductions through to GA84. Resolutions adopted during the past four Human Rights Council sessions (HRC60–63) have already generated a cumulative reduction of 19 reports by GA83. That is more than the 9 to 15 the Roadmap’s pace implies for those three sessions, and only one short of the 20-report ceiling for the whole period, with GA84 still to come.</strong></p>
+
+<h3>What is the impact on thematic balance and visibility?</h3>
+<p>One of the primary concerns <a href="https://ishr.ch/latest-updates/hrc61-organisations-concerned-over-impacts-of-budget-cuts-on-work-of-special-procedures/">raised by civil society</a> organisations is the thematic balance of reporting reductions and how these may negatively affect the visibility of certain issues at the General Assembly.</p>
+<p>Reporting reductions were broadly distributed across the three thematic clusters. <strong>In each cluster, roughly four in ten of the mandates up for renewal were affected</strong>: 5 of 13 in development, economic, social and cultural rights (DESC), 3 of 7 in equality and non-discrimination (END), and 5 of 13 in rule of law, accountability and civil space (RACS). Each cluster’s share of the cuts closely mirrors its share of renewals and of all thematic mandates, so no cluster has so far been disproportionately affected.</p>
+<figure class="iv-chart">
+  <p class="iv-chart-title">Special Procedures mandates by thematic cluster</p>
+  <ul class="iv-legend">
+    <li><i class="iv-sw" style="background:var(--ishr-pink)"></i>Mandates facing reporting cuts in HRC60–63 (13)</li>
+    <li><i class="iv-sw" style="background:var(--ishr-blue)"></i>Mandates renewed in HRC60–63 (33)</li>
+    <li><i class="iv-sw" style="background:var(--ishr-navy)"></i>All thematic mandates, 2025 (46)</li>
+  </ul>
+  <div id="ishr-c-clusters" role="group" aria-label="Grouped bars by cluster. Mandates facing reporting cuts in HRC60–63 (13): DESC 5 (38%), END 3 (23%), RACS 5 (38%). Mandates renewed in HRC60–63 (33): DESC 13 (39%), END 7 (21%), RACS 13 (39%). All thematic mandates in 2025 (46): DESC 17 (37%), END 11 (24%), RACS 18 (39%)."></div>
+  <details class="iv-data">
+    <summary>Show the data as a table</summary>
+    <div class="iv-scroll">
+      <table>
+        <thead><tr><th scope="col">Special Procedures cluster</th><th scope="col" class="n">Mandates facing reporting cuts in HRC60–63</th><th scope="col" class="n">Mandates renewed in HRC60–63</th><th scope="col" class="n">All thematic mandates, 2025</th><th scope="col" class="n">Share of renewed mandates affected</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Development, Economic, Social and Cultural Rights (DESC)</th><td class="n">5 (38%)</td><td class="n">13 (39%)</td><td class="n">17 (37%)</td><td class="n">38%</td></tr>
+          <tr><th scope="row">Equality and Non-Discrimination (END)</th><td class="n">3 (23%)</td><td class="n">7 (21%)</td><td class="n">11 (24%)</td><td class="n">43%</td></tr>
+          <tr><th scope="row">Rule of Law, Accountability and Civil Space (RACS)</th><td class="n">5 (38%)</td><td class="n">13 (39%)</td><td class="n">18 (39%)</td><td class="n">38%</td></tr>
+          <tr><th scope="row">Total</th><td class="n"><strong>13</strong></td><td class="n"><strong>33</strong></td><td class="n"><strong>46</strong></td><td class="n"><strong>39%</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </details>
+  <p class="iv-src"><em>The thematic mandates are clustered according to the division used by OHCHR’s Special Procedures Branch. “All thematic mandates” counts the 46 mandates that existed in 2025, before the merger and termination. Figures may not sum to 100% due to rounding.</em></p>
+</figure>
+
+<h3 id="ishr-actors">Who are the main actors driving changes to reporting practices?</h3>
+<p><strong>WEOG States</strong>, along with cross-regional groups that include at least one WEOG country, are the main penholders driving changes to reporting practices. WEOG States led 5 of the 13 changes on their own, and 5 of the 6 cross-regional initiatives included at least one WEOG member: 10 of 13 in total.</p>
+<p>There are notable exceptions:</p>
+<ul>
+  <li>The termination of the mandate of the Special Rapporteur on the elimination of discrimination against persons affected by leprosy was championed by a core group comprising Japan, Brazil, Ecuador, Ethiopia, Fiji, India, Kyrgyzstan and Morocco.</li>
+  <li>Two initiatives to reduce reporting were led by the African Group during HRC63.</li>
+</ul>
+<figure class="iv-chart">
+  <p class="iv-chart-title">Core groups</p>
+  <p class="iv-sub">Each square is one mandate whose reporting obligations have been reduced. Hover over or tab to a square to see the mandate and its core group.</p>
+  <div id="ishr-c-groups" role="group" aria-label="Core groups of the 13 resolutions reducing, merging or ending reporting: cross-regional 6 of 13, WEOG 5 of 13, African Group 2 of 13."></div>
+</figure>
+
+<h3 id="ishr-language">What language is used in resolutions to reduce reporting periodicity?</h3>
+<p>There is no uniform language around reporting reductions. Some resolutions specify the sessions in which mandate holders should report; others state more generally that they should report biennially to the General Assembly. Some resolutions use biennial reporting language while also specifying the sessions concerned.</p>
+<h4>Examples of language used in resolutions</h4>
+<blockquote class="iv-quote">
+  <span class="iv-tag iv-tag--bi">Biennial</span>
+  <p>“Requests the Special Rapporteur to continue to report, on an annual basis, to the Human Rights Council and, on a biennial basis, to the General Assembly, as of its 82nd session.”</p>
+  <footer>Special Rapporteur on adequate housing as a component of the right to an adequate standard of living</footer>
+</blockquote>
+<blockquote class="iv-quote">
+  <span class="iv-tag iv-tag--named">Specific sessions</span>
+  <p>“Requests the Special Rapporteur to continue to report on an annual basis to the Human Rights Council and to the General Assembly at its 81st and 83rd sessions, and urges any financial efficiency savings made in relation to this change in reporting frequency to be used to support the wider activities of the mandate, in particular country visits.”</p>
+  <footer>Special Rapporteur on human rights defenders</footer>
+</blockquote>
+<blockquote class="iv-quote">
+  <span class="iv-tag iv-tag--named">Specific sessions</span>
+  <p>“Requests the Special Rapporteur to present an annual report to the Human Rights Council and to present a report to the General Assembly at its 81st and 83rd sessions.”</p>
+  <footer>Special Rapporteur on the rights of persons with disabilities</footer>
+</blockquote>
+<blockquote class="iv-quote">
+  <span class="iv-tag iv-tag--bi">Biennial</span>
+  <p>“Also requests the Special Rapporteur to continue to report annually on the implementation of the mandate to the Human Rights Council and biennially to the General Assembly, in accordance with their respective programmes of work.”</p>
+  <footer>Special Rapporteur on the sale, sexual exploitation and sexual abuse of children</footer>
+</blockquote>
+
+<h4 id="ishr-risks">Risks of indefinite biennial reporting</h4>
+<p>Language that biennialises reporting, rather than cutting a specific session, presents two risks:</p>
+<ol>
+  <li><strong>Greater cumulative reductions:</strong> over a six-year period (two renewals), it would reduce reporting by half, compared with a one-third reduction if a single session were cut per three-year renewal period.</li>
+  <li><strong>Less flexibility:</strong> it would remove the possibility of choosing which years are most appropriate for reducing reporting, such as following the appointment of a new mandate holder or when a mandate holder considers it strategically appropriate.</li>
+</ol>
+<figure class="iv-chart">
+  <p class="iv-chart-title">Which General Assembly sessions get a written report?</p>
+  <p class="iv-sub">Illustrative example: the mandate is renewed after year 3. Select a year in the middle row to choose which session to skip in each renewal period. Under biennial language there is no choice.</p>
+  <div id="ishr-grid"></div>
+  <div id="ishr-c-cum" style="margin-top:1.75em" role="img" aria-label="Cumulative written reports over six years: 6 with annual reporting, 4 with one targeted cut per renewal, 3 with indefinite biennial reporting."></div>
+</figure>
+
+<h3 id="ishr-affected">How much of the thematic reporting to the General Assembly has already been affected?</h3>
+<p>In 2026, there are currently 44 thematic Special Procedures mandates. Among these:</p>
+<ul>
+  <li>The Working Group on Arbitrary Detention is only required to submit a written report annually to the Human Rights Council.</li>
+  <li>The Chair of the Working Group on Enforced or Involuntary Disappearances engages in an interactive dialogue with the General Assembly every year without presenting a written report.</li>
+  <li>The Working Group on Discrimination against Women and Girls also only reports orally each year to the General Assembly.</li>
+</ul>
+<p>Therefore, out of the 44 thematic Special Procedures mandates, <strong>41 submit written reports to the General Assembly</strong>. Two report orally only, and one does not report at all.</p>
+<figure class="iv-chart">
+  <ul class="iv-legend">
+    <li><i class="iv-sw" style="background:var(--accent)"></i>Written report, already affected (12)</li>
+    <li><i class="iv-sw" style="background:var(--written)"></i>Written report, not affected (29)</li>
+    <li><i class="iv-sw" style="background:var(--oral)"></i>Oral only (2)</li>
+    <li><i class="iv-sw iv-sw--none"></i>No report to the General Assembly (1)</li>
+  </ul>
+  <div id="ishr-waffle" style="max-width:34rem"></div>
+  <p class="iv-src">Each square is one thematic Special Procedures mandate. Hover over or tab to a square to see the mandate.</p>
+</figure>
+<div class="iv-note">
+  <p><strong>12 of the 41 thematic mandates that report in writing to the General Assembly (29%) have already been affected</strong> by reduced reporting periodicity or merger — close to three in ten. In addition, the mandate on leprosy has been terminated.</p>
+</div>
+
+<h3>What does ISHR recommend for future changes to reporting requirements?</h3>
+<p>The analysis demonstrates the need for a more strategic and coordinated approach to any further consideration of changes to Special Procedures reporting.</p>
+<p>Reporting reductions should not be treated as an automatic or purely numerical means of reducing the Third Committee’s workload. Instead, they should be assessed individually and cumulatively in light of their impact on mandate implementation, the visibility of human rights issues at the General Assembly, and opportunities for engagement with mandate holders.</p>
+<h4>In considering any future changes, States should:</h4>
+<ul class="iv-check" id="ishr-check">
+  <li><label><input type="checkbox"><div><strong>Undertake a case-by-case assessment and meaningfully consult mandate holders</strong> before modifying reporting requirements, taking into account the substantive needs of the mandate and when engagement with the General Assembly is most strategically important.</div></label></li>
+  <li><label><input type="checkbox"><div><strong>Prefer targeted, time-limited changes over permanent reductions</strong> in reporting periodicity. Where a reduction is considered necessary, identifying specific sessions in which reporting will not take place preserves greater flexibility than establishing indefinite biennial reporting. Any change should be reviewed at the mandate’s next renewal rather than automatically becoming the new baseline.</div></label></li>
+  <li><label><input type="checkbox"><div><strong>Preserve meaningful engagement with the General Assembly.</strong> Where written reporting is reduced, alternative opportunities for substantive interaction between mandate holders, Member States and civil society in New York should be maintained where possible.</div></label></li>
+  <li><label><input type="checkbox"><div><strong>Ensure that efficiencies strengthen mandate implementation.</strong> Savings resulting from reduced reporting should, to the greatest extent possible, be retained for other substantive mandate activities, including country visits, communications and engagement with affected communities and civil society. The approach adopted for the Special Rapporteur on the human rights to safe drinking water and sanitation, which aligned the reduction in reporting with the participation of the mandate holder in the UN Water Conference, provides a useful precedent.</div></label></li>
+  <li><label><input type="checkbox"><div><strong>Assess the cumulative and thematic impact before pursuing further reductions.</strong> States should consider the effects of changes across the Special Procedures system as a whole, including whether they disproportionately reduce the visibility of particular rights or groups at the General Assembly.</div></label></li>
+</ul>
+<div class="iv-score" aria-live="polite">
+  <div class="iv-meter" aria-hidden="true"><i id="ishr-meter"></i></div>
+  <p id="ishr-score-text">0 of 5 checked</p>
+  <button type="button" class="iv-reset" id="ishr-reset">Clear</button>
+</div>
+
+<p class="iv-pull">Efforts to improve the efficiency and working methods of the Third Committee should ultimately preserve the effectiveness and independence of Special Procedures and meaningful engagement between the human rights system in Geneva and the General Assembly in New York.</p>
+
+<div class="iv-tip" id="ishr-tip" aria-hidden="true"></div>
+</div>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+<script>
+(function(){
+  if (!window.d3) return;
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const tip = document.getElementById("ishr-tip");
+
+  function tipShow(html, x, y){
+    tip.innerHTML = html;
+    tip.style.opacity = 1;
+    const w = tip.offsetWidth, hgt = tip.offsetHeight;
+    const vw = document.documentElement.clientWidth, vh = document.documentElement.clientHeight;
+    tip.style.left = Math.max(8, Math.min(x + 12, vw - w - 8)) + "px";
+    tip.style.top = (y + 14 + hgt > vh ? y - hgt - 10 : y + 14) + "px";
+  }
+  function tipAt(el, html){ const r = el.getBoundingClientRect(); tipShow(html, r.left, r.bottom); }
+  function tipHide(){ tip.style.opacity = 0; }
+  window.addEventListener("scroll", tipHide, {passive:true});
+  try { window.parent.addEventListener("scroll", tipHide, {passive:true}); } catch(e) {}
+  function bindTip(sel, fn){
+    sel.classed("mark", true).attr("tabindex", 0)
+      .attr("aria-label", d => fn(d).replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim())
+      .on("mousemove", (e, d) => tipShow(fn(d), e.clientX, e.clientY))
+      .on("mouseleave blur", tipHide)
+      .on("focus", function(e, d){ tipAt(this, fn(d)); })
+      .on("click", function(e, d){
+        e.stopPropagation();
+        if (e.detail === 0) tipAt(this, fn(d));
+        else tipShow(fn(d), e.clientX, e.clientY);
+      });
+  }
+  document.addEventListener("pointerdown", e => {
+    if (!e.target.closest(".ishr-viz .mark")) tipHide();
+  });
+  document.addEventListener("keydown", e => { if(e.key === "Escape") tipHide(); });
+
+  function responsive(id, draw){
+    if(window.ISHR_EMBED_TARGETS && !window.ISHR_EMBED_TARGETS.includes(id)) return ()=>{};
+    const el = document.getElementById(id);
+    let last = 0;
+    const run = force => {
+      const w = Math.round(el.clientWidth);
+      if (!w || (!force && w === last)) return;
+      last = w;
+      el.innerHTML = "";
+      draw(el, w);
+    };
+    if (window.ResizeObserver) new ResizeObserver(() => run(false)).observe(el);
+    else { window.addEventListener("resize", () => run(false)); run(true); }
+    return () => run(true);
+  }
+  const fmt = d3.format("d");
+
+  /* Motion: play each chart's entrance once, when it scrolls into view */
+  const played = new WeakSet();
+  function reveal(el, hide, play){
+    if (reduce || played.has(el) || !window.IntersectionObserver) return;
+    hide();
+    const io = new IntersectionObserver(ents => {
+      if (ents.some(e => e.isIntersecting)) { io.disconnect(); played.add(el); play(); }
+    }, {threshold: 0.3});
+    io.observe(el);
+  }
+  function scaleAbout(node, k){
+    const b = node.getBBox(), cx = b.x + b.width / 2, cy = b.y + b.height / 2;
+    return `translate(${cx},${cy}) scale(${k}) translate(${-cx},${-cy})`;
+  }
+  function popIn(el, sel, delay){
+    reveal(el,
+      () => sel.attr("transform", function(){ return scaleAbout(this, 0.001); }),
+      () => sel.transition().delay(delay).duration(380).ease(d3.easeBackOut.overshoot(1.4))
+              .attrTween("transform", function(){ const n = this; return t => scaleAbout(n, Math.max(t, 0.001)); })
+              .on("end", function(){ d3.select(this).attr("transform", null); }));
+  }
+  function drawLine(el, paths, dur){
+    reveal(el,
+      () => paths.each(function(){ const L = this.getTotalLength(); d3.select(this).attr("stroke-dasharray", L + " " + L).attr("stroke-dashoffset", L); }),
+      () => paths.transition().duration(dur || 1400).ease(d3.easeCubicInOut).attr("stroke-dashoffset", 0)
+              .on("end", function(){ d3.select(this).attr("stroke-dasharray", null).attr("stroke-dashoffset", null); }));
+  }
+  function fadeIn(el, sel, delay){
+    reveal(el, () => sel.style("opacity", 0), () => sel.transition().delay(delay || 0).duration(500).style("opacity", 1).on("end", function(){ d3.select(this).style("opacity", null); }));
+  }
+
+  /* ---------- Data from the article ---------- */
+  const events = [
+    {y:2014, k:"New", m:"Special Rapporteur on the rights of persons with disabilities"},
+    {y:2014, k:"New", m:"Special Rapporteur on the negative impact of unilateral coercive measures on the enjoyment of human rights"},
+    {y:2015, k:"New", m:"Independent Expert on the enjoyment of human rights by persons with albinism"},
+    {y:2015, k:"New", m:"Special Rapporteur on the right to privacy"},
+    {y:2016, k:"New", m:"Special Rapporteur on the right to development"},
+    {y:2016, k:"New", m:"Independent Expert on protection against violence and discrimination based on sexual orientation and gender identity"},
+    {y:2017, k:"New", m:"Special Rapporteur on the elimination of discrimination against persons affected by leprosy (Hansen’s disease) and their family members"},
+    {y:2021, k:"New", m:"Special Rapporteur on the promotion and protection of human rights in the context of climate change"},
+    {y:2023, k:"New", m:"Working Group on the rights of peasants and other people working in rural areas"},
+    {y:2025, k:"Merger", m:"Special Rapporteur on contemporary forms of slavery and trafficking in persons (merged mandate)"},
+    {y:2026, k:"Termination", m:"Special Rapporteur on the elimination of discrimination against persons affected by leprosy (Hansen’s disease) and their family members"}
+  ];
+  const mandateCounts = [[2014,39],[2015,41],[2016,43],[2017,44],[2018,44],[2019,44],[2020,44],[2021,45],[2022,45],[2023,46],[2024,46],[2025,46],[2026,44]];
+  const reports = [[2014,135,36],[2015,134,38],[2016,134,40],[2017,137,39],[2018,135,46],[2019,136,46],[2020,134,48],[2021,89,50],[2022,89,46],[2023,126,48],[2024,133,48],[2025,118,49]];
+  const affected = [
+    {m:"Special Rapporteur on contemporary forms of slavery and trafficking in persons (merger)", hrc:"HRC60", ga:["GA81","GA82","GA83"], f:"RACS", core:"United Kingdom of Great Britain and Northern Ireland, Argentina, Australia, Germany, Jordan, Philippines", reg:"Cross-regional"},
+    {m:"Special Rapporteur on the human rights to safe drinking water and sanitation", hrc:"HRC60", ga:["GA81","GA83"], f:"DESC", core:"Germany, Spain", reg:"WEOG"},
+    {m:"Special Rapporteur on the promotion and protection of the right to freedom of opinion and expression", hrc:"HRC61", ga:["GA81"], f:"RACS", core:"Canada, Netherlands", reg:"WEOG"},
+    {m:"Special Rapporteur on adequate housing", hrc:"HRC61", ga:["GA82"], f:"DESC", core:"Brazil, Germany, Finland, Namibia", reg:"Cross-regional"},
+    {m:"Special Rapporteur on the situation of human rights defenders", hrc:"HRC61", ga:["GA82"], f:"RACS", core:"Norway", reg:"WEOG"},
+    {m:"Special Rapporteur on the sale, sexual exploitation and sexual abuse of children", hrc:"HRC61", ga:["GA82"], f:"END", core:"Cyprus (on behalf of the European Union), Uruguay (on behalf of GRULAC, except Argentina)", reg:"Cross-regional"},
+    {m:"Special Rapporteur on torture and other cruel, inhuman or degrading treatment", hrc:"HRC61", ga:["GA81","GA83"], f:"RACS", core:"Denmark", reg:"WEOG"},
+    {m:"Special Rapporteur on the rights of persons with disabilities", hrc:"HRC62", ga:["GA82"], f:"END", core:"Mexico, New Zealand", reg:"Cross-regional"},
+    {m:"Special Rapporteur on extrajudicial, summary or arbitrary executions", hrc:"HRC62", ga:["GA83"], f:"RACS", core:"Sweden, Finland", reg:"WEOG"},
+    {m:"Special Rapporteur on the elimination of discrimination against persons affected by leprosy (termination)", hrc:"HRC62", ga:["GA81","GA82","GA83"], f:"DESC", core:"Japan, Brazil, Ecuador, Ethiopia, Fiji, India, Kyrgyzstan, Morocco", reg:"Cross-regional"},
+    {m:"Special Rapporteur on extreme poverty and human rights", hrc:"HRC62", ga:["GA82"], f:"DESC", core:"France, Albania, Belgium, Chile, Morocco, Peru, Philippines, Romania", reg:"Cross-regional"},
+    {m:"Working Group of Experts on People of African Descent", hrc:"HRC63", ga:["GA82"], f:"END", core:"African Group", reg:"African Group"},
+    {m:"Special Rapporteur on the implications for human rights of the environmentally sound management and disposal of hazardous substances and wastes", hrc:"HRC63", ga:["GA82"], f:"DESC", core:"African Group", reg:"African Group"}
+  ];
+  const unaffected = [
+    {m:"Independent Expert on the enjoyment of all human rights by older persons", hrc:"HRC60", f:"END", core:"Argentina, Brazil, Gambia, Philippines, Slovenia"},
+    {m:"Special Rapporteur on the right of everyone to the enjoyment of the highest attainable standard of physical and mental health", hrc:"HRC60", f:"DESC", core:"Brazil"},
+    {m:"Working Group on Arbitrary Detention", hrc:"HRC60", f:"RACS", core:"France", gaMode:"none"},
+    {m:"Special Rapporteur on the right to development", hrc:"HRC60", f:"DESC", core:"Uganda (on behalf of Movement of Non-Aligned Countries)"},
+    {m:"Working Group on the use of mercenaries", hrc:"HRC60", f:"RACS", core:"Cuba"},
+    {m:"Special Rapporteur on the rights of indigenous peoples", hrc:"HRC60", f:"END", core:"Mexico, Guatemala"},
+    {m:"Independent Expert on the effects of foreign debt and other related international financial obligations of States", hrc:"HRC61", f:"DESC", core:"Cuba"},
+    {m:"Special Rapporteur on minority issues", hrc:"HRC61", f:"END", core:"Austria, Slovenia"},
+    {m:"Special Rapporteur on contemporary forms of racism, racial discrimination, xenophobia and related intolerance", hrc:"HRC61", f:"END", core:"Kenya (African Group)"},
+    {m:"Special Rapporteur on the human rights of migrants", hrc:"HRC61", f:"RACS", core:"Mexico"},
+    {m:"Special Rapporteur on the right to food", hrc:"HRC61", f:"DESC", core:"Cuba"},
+    {m:"Working Group on the issue of human rights and transnational corporations", hrc:"HRC62", f:"RACS", core:"Argentina"},
+    {m:"Special Rapporteur on the right to education", hrc:"HRC62", f:"DESC", core:"Portugal"},
+    {m:"Special Rapporteur on the independence of judges and lawyers", hrc:"HRC62", f:"RACS", core:"Hungary, Australia, Botswana, Maldives, Mexico, Thailand"},
+    {m:"Independent Expert on human rights and international solidarity", hrc:"HRC62", f:"DESC", core:"Cuba"},
+    {m:"Working Group on Enforced or Involuntary Disappearances", hrc:"HRC63", f:"RACS", core:"France, Argentina, Japan, Morocco", gaMode:"oral"},
+    {m:"Independent expert on the promotion of a democratic and equitable international order", hrc:"HRC63", f:"RACS", core:"Cuba"},
+    {m:"Working Group on the rights of peasants and other people working in rural areas", hrc:"HRC63", f:"DESC", core:"Bolivia (Plurinational State of), Cuba, Gambia, Indonesia, Luxembourg, South Africa"},
+    {m:"Special Rapporteur on the promotion of truth, justice, reparation & guarantees of non-recurrence", hrc:"HRC63", f:"RACS", core:"Switzerland, Argentina, Morocco"},
+    {m:"Special Rapporteur on the negative impact of unilateral coercive measures on the enjoyment of human rights", hrc:"HRC63", f:"DESC", core:"Uganda (on behalf of the Movement of Non-Aligned Countries)"}
+  ];
+  const fColor = {DESC:"var(--desc)", END:"var(--end)", RACS:"var(--racs)"};
+  const fText = {DESC:"#ffffff", END:"#3a2800", RACS:"#ffffff"};
+
+  /* ---------- Historical mandates: annotated step chart ---------- */
+  const tb = d3.select("#ishr-t-events tbody");
+  events.forEach(e => {
+    const tr = tb.append("tr")
+      .on("mouseenter", () => d3.selectAll("#ishr-c-mandates circle.ev").classed("faded", o => o.y !== e.y))
+      .on("mouseleave", () => d3.selectAll("#ishr-c-mandates circle.ev").classed("faded", false));
+    tr.append("td").append("strong").text(e.y);
+    tr.append("td").text(e.k);
+    tr.append("td").text(e.m);
+  });
+  const yearData = mandateCounts.map(([y,v]) => ({y,v,ev:events.filter(e=>e.y===y)}));
+  responsive("ishr-c-mandates", (el,w) => {
+    const h=302,m={t:26,r:29,b:41,l:40};
+    const x=d3.scaleLinear().domain([2014,2026]).range([m.l,w-m.r]);
+    const y=d3.scaleLinear().domain([36,48]).range([h-m.b,m.t]);
+    const svg=d3.select(el).append("svg").attr("width",w).attr("height",h);
+    const defs=svg.append("defs");
+    const grad=defs.append("linearGradient").attr("id","ishr-mandate-area").attr("x1","0").attr("x2","0").attr("y1","0").attr("y2","1");
+    grad.append("stop").attr("offset","0%").attr("stop-color","#2869b4").attr("stop-opacity",.14);
+    grad.append("stop").attr("offset","100%").attr("stop-color","#2869b4").attr("stop-opacity",.015);
+    svg.append("g").selectAll("line").data([36,40,44,48]).join("line").attr("class","gridline")
+      .attr("x1",m.l).attr("x2",w-m.r).attr("y1",d=>y(d)).attr("y2",d=>y(d));
+    svg.append("g").attr("class","axis").attr("transform",`translate(${m.l},0)`)
+      .call(d3.axisLeft(y).tickValues([36,40,44,48]).tickFormat(fmt).tickSize(0).tickPadding(7)).select(".domain").remove();
+    svg.append("g").attr("class","axis").attr("transform",`translate(0,${h-m.b})`)
+      .call(d3.axisBottom(x).tickValues(w<400?[2014,2017,2020,2023,2026]:[2014,2016,2018,2020,2022,2024,2026])
+      .tickFormat(fmt).tickSize(0).tickPadding(10)).select(".domain").remove();
+    const line=svg.append("path").datum(yearData).attr("fill","none").attr("stroke","var(--ink)")
+      .attr("stroke-width",3).attr("stroke-linecap","round").attr("stroke-linejoin","round")
+      .attr("d",d3.line().x(d=>x(d.y)).y(d=>y(d.v)).curve(d3.curveStepAfter));
+    const marks=yearData.filter(d=>d.ev.length);
+    const dots=svg.selectAll("circle.ev").data(marks).join("circle").attr("class","ev")
+      .attr("cx",d=>x(d.y)).attr("cy",d=>y(d.v)).attr("r",d=>d.ev.length>1?7.5:6)
+      .attr("fill",d=>d.ev[0].k==="New"?"var(--written)":"var(--accent)")
+      .attr("stroke","#fff").attr("stroke-width",2.5).style("pointer-events","none");
+    const labels=svg.append("g").style("pointer-events","none");
+    [{yr:2014,v:39,dx:13,dy:27},{yr:2023,v:46,dx:0,dy:-16},{yr:2026,v:44,dx:-13,dy:-16}]
+      .forEach(a=>labels.append("text").attr("class","lbl-b")
+        .attr("x",x(a.yr)+a.dx).attr("y",y(a.v)+a.dy).attr("text-anchor","middle")
+        .style("font-size","14px").text(a.v));
+    const guide=svg.append("line").attr("y1",m.t).attr("y2",h-m.b)
+      .attr("stroke","#8291a8").attr("stroke-dasharray","3 4").style("opacity",0);
+    const hDot=svg.append("circle").attr("r",5).attr("fill","var(--ink)")
+      .attr("stroke","#fff").attr("stroke-width",2).style("pointer-events","none").style("opacity",0);
+    const step=x(2015)-x(2014);
+    const hit=svg.selectAll("rect.hit").data(yearData).join("rect").attr("class","hit")
+      .attr("x",d=>x(d.y)-step/2).attr("width",step).attr("y",m.t).attr("height",h-m.b-m.t).attr("fill","transparent");
+    bindTip(hit,d=>`<b>${d.y}${d.y===2026?" (as of October)":""}: ${d.v} mandates</b>`+d.ev.map(e=>`<br>${e.k}: ${e.m}`).join(""));
+    hit.on("mouseenter.track focus.track",(e,d)=>{
+      guide.attr("x1",x(d.y)).attr("x2",x(d.y)).style("opacity",1);
+      hDot.attr("cx",x(d.y)).attr("cy",y(d.v)).style("opacity",1);
+    }).on("mouseleave.track blur.track",()=>{guide.style("opacity",0);hDot.style("opacity",0);});
+    drawLine(el,line,1150);
+    popIn(el,dots,(d,i)=>220+i*85);
+    fadeIn(el,labels,800);
+  });
+
+  /* ---------- Reports per year: distinct scales in coordinated panels ---------- */
+  const rtb=d3.select("#ishr-t-reports tbody");
+  reports.forEach(([year,hrcN,gaN])=>{
+    const tr=rtb.append("tr");tr.append("td").text(year);
+    tr.append("td").attr("class","n").text(hrcN);
+    tr.append("td").attr("class","n").text(gaN);
+  });
+  responsive("ishr-c-reports",(el,w)=>{
+    const compact=w<460, h=448, margin={l:43,r:27,b:34};
+    const x=d3.scaleLinear().domain([2014,2025]).range([margin.l,w-margin.r]);
+    const svg=d3.select(el).append("svg").attr("width",w).attr("height",h);
+    const series=[
+      {name:"Human Rights Council",idx:1,c:"var(--l-hrc)",top:32,bottom:187,domain:[80,145],ticks:[80,100,120,140]},
+      {name:"General Assembly",idx:2,c:"var(--l-ga)",top:252,bottom:409,domain:[30,55],ticks:[30,35,40,45,50,55]}
+    ];
+    const paths=[],pointG=svg.append("g").attr("class","iv-dual-points").style("pointer-events","none");
+    series.forEach((s,i)=>{
+      s.y=d3.scaleLinear().domain(s.domain).range([s.bottom,s.top]);
+      const grp=svg.append("g").attr("class","iv-panel");
+      grp.append("text").attr("x",margin.l).attr("y",s.top-13).attr("class","lbl-b")
+        .style("font-size","14px").style("fill",s.c).text(s.name);
+      grp.selectAll("line.grid").data(s.ticks).join("line").attr("class","gridline")
+        .attr("x1",margin.l).attr("x2",w-margin.r).attr("y1",d=>s.y(d)).attr("y2",d=>s.y(d));
+      grp.append("g").attr("class","axis").attr("transform",`translate(${margin.l},0)`)
+        .call(d3.axisLeft(s.y).tickValues(s.ticks).tickSize(0).tickPadding(8)).select(".domain").remove();
+      if (i===0) {
+        const note=grp.append("text").attr("class","lbl-m").attr("text-anchor","middle")
+          .attr("x",x(2021.5)).attr("y",s.y(compact?81:112)).style("font-size",compact?"11px":"12px");
+        (compact?["COVID-19"]:["COVID-19:","fewer visits"]).forEach((t,k)=>
+          note.append("tspan").attr("x",x(2021.5)).attr("dy",k?"1.25em":0).text(t));
+      }
+      const path=grp.append("path").datum(reports).attr("fill","none").attr("stroke",s.c)
+        .attr("stroke-width",3).attr("stroke-linecap","round").attr("stroke-linejoin","round")
+        .attr("d",d3.line().x(d=>x(d[0])).y(d=>s.y(d[s.idx])).curve(d3.curveMonotoneX));
+      paths.push(path.node());
+      const start=reports[0],end=reports[reports.length-1];
+      [start,end].forEach((p,j)=>{
+        grp.append("circle").attr("cx",x(p[0])).attr("cy",s.y(p[s.idx])).attr("r",4.5)
+          .attr("fill",j? s.c:"white").attr("stroke",s.c).attr("stroke-width",2.5);
+        grp.append("text").attr("class","lbl-b").attr("x",x(p[0])+(j?-9:7))
+          .attr("y",s.y(p[s.idx])+(j&&p[s.idx]<reports[reports.length-2][s.idx]?22:-10)).attr("text-anchor",j?"end":"start")
+          .style("fill",s.c).style("font-size","13px").text(p[s.idx]);
+      });
+      s.tracer=pointG.append("circle").attr("r",5).attr("fill",s.c).attr("stroke","#fff")
+        .attr("stroke-width",2).style("opacity",0);
+    });
+    svg.append("g").attr("class","axis").attr("transform",`translate(0,${series[1].bottom})`)
+      .call(d3.axisBottom(x).tickValues(compact?[2014,2016,2018,2020,2022,2025]:[2014,2016,2018,2020,2022,2024,2025])
+        .tickFormat(fmt).tickSize(0).tickPadding(10)).select(".domain").remove();
+    const guides=series.map(s=>svg.append("line").attr("y1",s.top).attr("y2",s.bottom)
+      .attr("stroke","#8c9aad").attr("stroke-dasharray","3 4").style("opacity",0));
+    const step=x(2015)-x(2014);
+    const hit=svg.selectAll("rect.hit").data(reports).join("rect").attr("class","hit")
+      .attr("x",d=>x(d[0])-step/2).attr("width",step).attr("y",0).attr("height",h-28).attr("fill","transparent");
+    bindTip(hit,d=>`<b>${d[0]}</b><br>Human Rights Council: ${d[1]} reports<br>General Assembly: ${d[2]} reports`);
+    hit.on("mouseenter.track focus.track click.track",(e,d)=>{
+      series.forEach((s,i)=>{
+        guides[i].attr("x1",x(d[0])).attr("x2",x(d[0])).style("opacity",1);
+        s.tracer.attr("cx",x(d[0])).attr("cy",s.y(d[s.idx])).style("opacity",1);
+      });
+    }).on("mouseleave.track blur.track",()=>{
+      guides.forEach(line=>line.style("opacity",0));
+      series.forEach(s=>s.tracer.style("opacity",0));
+    });
+    drawLine(el,d3.selectAll(paths),1400);
+  });
+
+  /* ---------- Renewals: interactive unit rows by Council session ---------- */
+  responsive("ishr-c-renewals",(el,w)=>{
+    const sessions=["HRC60","HRC61","HRC62","HRC63"].map(s=>{
+      const kindOf=a=>a.m.includes("(merger)")?"merger":a.m.includes("(termination)")?"termination":null;
+      const cut=affected.filter(a=>a.hrc===s).map(a=>({m:a.m,s,cut:true,x:kindOf(a)}))
+        .sort((a,b)=>(a.x?1:0)-(b.x?1:0));
+      const kept=unaffected.filter(u=>u.hrc===s).map(u=>({m:u.m,s,cut:false}));
+      return {s,items:cut.concat(kept),c:cut.length};
+    });
+    const rowH=79,gap=6,inner=8,size=Math.min(32,Math.floor((w-inner*2-9*gap)/10));
+    const h=sessions.length*rowH+2;
+    const svg=d3.select(el).append("svg").attr("width",w).attr("height",h);
+    const g=svg.selectAll("g.ses").data(sessions).join("g").attr("class","ses")
+      .attr("transform",(d,i)=>`translate(0,${i*rowH})`);
+    g.append("text").attr("class","lbl-b").attr("x",inner).attr("y",19).text(d=>d.s);
+    g.append("text").attr("class","lbl-m").attr("x",w-inner).attr("y",19)
+      .attr("text-anchor","end").style("font-weight",600)
+      .text(d=>`${d.c} of ${d.items.length} (${Math.round(d.c/d.items.length*100)}%)`);
+    g.append("line").attr("x1",inner).attr("x2",w-inner).attr("y1",rowH-7).attr("y2",rowH-7)
+      .attr("stroke","var(--rule)");
+    g.each(function(row){
+      const sq=d3.select(this).selectAll("rect.sq").data(row.items).join("rect").attr("class","sq")
+        .attr("x",(d,i)=>inner+i*(size+gap)).attr("y",30).attr("width",size).attr("height",size)
+        .attr("rx",5).attr("fill",d=>d.x?"#f39ab8":d.cut?"var(--accent)":"var(--soft2)")
+        .attr("stroke",d=>d.cut?"#c70f49":"#c3cbd9").attr("stroke-width",.9);
+      bindTip(sq,d=>`<b>${d.m}</b><br>${d.x==="merger"?`Merged at ${d.s}`:d.x==="termination"?`Terminated at ${d.s}`:`Renewed at ${d.s}: ${d.cut?"reporting reduced":"reporting maintained"}`}`);
+      popIn(el,sq,(d,i)=>sessions.indexOf(row)*120+i*28);
+    });
+  });
+
+  /* ---------- Mandate tables ---------- */
+  const pill = (sel, f) => sel.append("span").attr("class", "pill").style("background", fColor[f]).style("color", fText[f]).text(f);
+  const atb = d3.select("#ishr-t-affected tbody");
+  affected.forEach(d => {
+    const tr = atb.append("tr");
+    tr.append("td").text(d.m);
+    tr.append("td").text(d.hrc);
+    ["GA81", "GA82", "GA83"].forEach(g => {
+      const on = d.ga.includes(g);
+      tr.append("td").attr("class", "c").append("span").attr("class", "dot" + (on ? " on" : ""))
+        .attr("role", "img").attr("aria-label", on ? g + " report cut" : g + " not cut").attr("title", on ? g + " report cut" : "");
+    });
+    pill(tr.append("td"), d.f);
+    tr.append("td").text(d.core);
+    tr.append("td").text(d.reg);
+  });
+  const utb = d3.select("#ishr-t-unaffected tbody");
+  unaffected.forEach(d => {
+    const tr = utb.append("tr");
+    tr.append("td").text(d.m);
+    tr.append("td").text(d.hrc);
+    pill(tr.append("td"), d.f);
+    tr.append("td").text(d.core);
+  });
+
+  /* ---------- Reports cut: table with shading ---------- */
+  const hrcS = ["HRC60", "HRC61", "HRC62", "HRC63"];
+  const gaS = [{s:"GA81", yr:"2026"}, {s:"GA82", yr:"2027"}, {s:"GA83", yr:"2028"}];
+  const cutsOf = (g, h) => affected.filter(a => a.ga.includes(g) && (!h || a.hrc === h));
+  const ctb = d3.select("#ishr-t-cuts tbody");
+  d3.selectAll(".ishr-viz .iv-scroll").attr("tabindex",0);
+  gaS.forEach(g => {
+    const tr = ctb.append("tr");
+    tr.append("th").attr("scope", "row").text(`${g.s} (${g.yr})`);
+    hrcS.forEach(h => {
+      const list = cutsOf(g.s, h), v = list.length;
+      const td = tr.append("td").datum({g, h, list}).classed("z", !v)
+        .attr("data-intensity", Math.min(v, 4)).text(v);
+      if (v) bindTip(td, d => `<b>${d.g.s} (${d.g.yr}): ${d.list.length} cut during ${d.h}</b>` + d.list.map(a => "<br>" + a.m).join(""));
+    });
+    const all = cutsOf(g.s);
+    const td = tr.append("td").attr("class", "tot").datum({g, list: all}).text(all.length);
+    bindTip(td, d => `<b>${d.g.s} (${d.g.yr}): ${d.list.length} reports cut</b>` + d.list.map(a => "<br>" + a.m).join(""));
+  });
+  const ttr = ctb.append("tr").attr("class", "total");
+  ttr.append("th").attr("scope", "row").text("Total");
+  hrcS.forEach(h => ttr.append("td").text(d3.sum(gaS, g => cutsOf(g.s, h).length)));
+  ttr.append("td").attr("class", "grand").text(d3.sum(gaS, g => cutsOf(g.s).length));
+  ctb.selectAll(".mark").style("outline-offset", "-3px");
+
+  /* ---------- Roadmap: reference layout with range BEHIND stacked GA bars ---------- */
+  responsive("ishr-c-roadmap",(el,w)=>{
+    // Keep the screenshot's proportions; allow horizontal scrolling on narrow screens.
+    const W=Math.max(490,w), H=246, m={l:18,r:20};
+    const x=d3.scaleLinear().domain([0,21]).range([m.l,W-m.r]);
+    const svg=d3.select(el).append("svg").attr("width",W).attr("height",H)
+      .attr("viewBox",`0 0 ${W} ${H}`);
+    const ink="#0c1121", muted="#b1b9cb", pink="#ff3d81";
+    const segs=[
+      {s:"GA81 (2026)",k:"GA81",v:5,c:"#4e6dc2",t:"#f7f9ff"},
+      {s:"GA82 (2027)",k:"GA82",v:9,c:"#7f9de8",t:ink},
+      {s:"GA83 (2028)",k:"GA83",v:5,c:"#c7d4fb",t:ink}
+    ];
+    let acc=0;
+    segs.forEach(d=>{d.x0=acc;acc+=d.v;d.x1=acc;});
+
+    const bandTop=47, bandBottom=179, barTop=80, barHeight=55;
+
+    // The 9–15 band is a translucent background range spanning above AND below
+    // the stacked bar, rather than a wash painted over the bar's colours.
+    svg.append("rect").attr("x",x(9)).attr("y",bandTop)
+      .attr("width",x(15)-x(9)).attr("height",bandBottom-bandTop)
+      .attr("fill","#8391b5").attr("fill-opacity",.22)
+      .style("pointer-events","none");
+
+    svg.append("text").attr("x",(x(9)+x(15))/2).attr("y",35)
+      .attr("text-anchor","middle").attr("fill",muted)
+      .style("font-size","13px").style("font-weight",500)
+      .text("Roadmap pace, GA81–83: 9 to 15");
+
+    const g=svg.selectAll("g.road-seg").data(segs).join("g").attr("class","road-seg");
+    const rects=g.append("rect")
+      .attr("x",d=>x(d.x0)).attr("y",barTop)
+      .attr("width",d=>x(d.x1)-x(d.x0)).attr("height",barHeight)
+      .attr("fill",d=>d.c).attr("stroke",ink).attr("stroke-width",2)
+      .attr("stroke-linejoin","miter");
+    bindTip(rects,d=>`<b>${d.s}</b><br>${d.v} reports cut`);
+
+    g.append("text").attr("x",d=>(x(d.x0)+x(d.x1))/2)
+      .attr("y",barTop+barHeight/2+6).attr("text-anchor","middle")
+      .attr("fill",d=>d.t).style("font-size","16px")
+      .style("font-weight",700).style("pointer-events","none")
+      .text(d=>`${d.k}: ${d.v}`);
+
+    // Exact 15-report upper bound is emphasised through the full-height dashed
+    // guide, with the bracket running from 15 to the actual total of 19.
+    svg.append("line").attr("x1",x(15)).attr("x2",x(15))
+      .attr("y1",bandTop).attr("y2",bandBottom)
+      .attr("stroke",pink).attr("stroke-width",2)
+      .attr("stroke-dasharray","5 4").style("pointer-events","none");
+
+    svg.append("path").attr("d",`M${x(15)},${60} H${x(19)} V${66}`)
+      .attr("fill","none").attr("stroke",pink).attr("stroke-width",2.2)
+      .style("pointer-events","none");
+    svg.append("text").attr("x",(x(15)+x(19))/2).attr("y",56)
+      .attr("text-anchor","middle").attr("fill",pink)
+      .style("font-size","17px").style("font-weight",700)
+      .text("4 above");
+
+    // Ceiling for the Roadmap's full period (GA81–GA84)
+    svg.append("line").attr("x1",x(20)).attr("x2",x(20))
+      .attr("y1",bandTop).attr("y2",181)
+      .attr("stroke",muted).attr("stroke-width",1.5)
+      .attr("stroke-dasharray","2 3").style("pointer-events","none");
+    svg.append("text").attr("x",x(20)-6).attr("y",193)
+      .attr("text-anchor","end").attr("fill",muted)
+      .style("font-size","12px").style("font-weight",500)
+      .text("Full Roadmap period to GA84: up to 20");
+
+    const axis=svg.append("g").attr("class","axis")
+      .attr("transform","translate(0,203)")
+      .call(d3.axisBottom(x).tickValues([0,5,10,15,20]).tickSize(0).tickPadding(0));
+    axis.select(".domain").remove();
+    axis.selectAll("text").style("fill",muted)
+      .style("font-size","13px").style("font-weight",500);
+    svg.append("text").attr("x",W-m.r).attr("y",235)
+      .attr("text-anchor","end").attr("fill",muted)
+      .style("font-size","13px")
+      .text("Reports cut, GA81 to GA83");
+  });
+
+  /* ---------- Thematic clusters: distribution shown consistently with table ---------- */
+  const clusterRows=[
+    {k:"DESC",name:"Development, Economic, Social and Cultural Rights (DESC)",v:[[5,38],[13,39],[17,37]]},
+    {k:"END",name:"Equality and Non-Discrimination (END)",v:[[3,23],[7,21],[11,24]]},
+    {k:"RACS",name:"Rule of Law, Accountability and Civil Space (RACS)",v:[[5,38],[13,39],[18,39]]}
+  ];
+  const cSeries=[
+    {label:"Mandates facing reporting cuts in HRC60–63",n:13,fill:"var(--ishr-pink)"},
+    {label:"Mandates renewed in HRC60–63",n:33,fill:"var(--ishr-blue)"},
+    {label:"All thematic mandates, 2025",n:46,fill:"var(--ishr-navy)"}
+  ];
+  responsive("ishr-c-clusters",(el,w)=>{
+    const groupH=126,barH=19,gapB=7,startY=28,chartBottom=3*groupH+8;
+    const h=chartBottom+27,m={l:11,r:105};
+    const x=d3.scaleLinear().domain([0,50]).range([m.l,w-m.r]);
+    const svg=d3.select(el).append("svg").attr("width",w).attr("height",h);
+    svg.append("g").selectAll("line").data([0,10,20,30,40,50]).join("line")
+      .attr("class","gridline").attr("x1",d=>x(d)).attr("x2",d=>x(d))
+      .attr("y1",startY).attr("y2",chartBottom);
+    const groups=svg.selectAll("g.cluster").data(clusterRows).join("g").attr("class","cluster")
+      .attr("transform",(d,i)=>`translate(0,${i*groupH})`);
+    groups.append("text").attr("class","lbl-b").attr("x",m.l).attr("y",16)
+      .style("font-size",w<500?"12px":"13px")
+      .text(d=>w<515?d.k:d.name)
+      .append("title").text(d=>d.name);
+    groups.each(function(row){
+      const items=cSeries.map((s,j)=>({row,s,cnt:row.v[j][0],pct:row.v[j][1],j}));
+      const g=d3.select(this);
+      g.selectAll("rect.track").data(items).join("rect").attr("class","track")
+        .attr("x",x(0)).attr("y",d=>startY+d.j*(barH+gapB))
+        .attr("width",x(50)-x(0)).attr("height",barH).attr("fill","#f2f5fa").attr("rx",3);
+      const bars=g.selectAll("rect.bar").data(items).join("rect").attr("class","bar")
+        .attr("x",x(0)).attr("y",d=>startY+d.j*(barH+gapB))
+        .attr("width",d=>x(d.pct)-x(0)).attr("height",barH).attr("rx",3)
+        .attr("fill",d=>d.s.fill);
+      bindTip(bars,d=>`<b>${d.row.name}</b><br>${d.s.label}: ${d.cnt} of ${d.s.n} (${d.pct}%)`);
+      reveal(el,()=>bars.attr("width",0),()=>bars.transition().delay((d)=>clusterRows.indexOf(row)*135+d.j*90)
+        .duration(640).ease(d3.easeCubicOut).attr("width",d=>x(d.pct)-x(0)));
+      g.selectAll("text.value").data(items).join("text").attr("class","lbl-b value")
+        .attr("x",w-m.r+8).attr("y",d=>startY+d.j*(barH+gapB)+14)
+        .style("font-size","12.5px").text(d=>`${d.pct}% · ${d.cnt}`);
+    });
+    svg.append("g").attr("class","axis").attr("transform",`translate(0,${chartBottom})`)
+      .call(d3.axisBottom(x).tickValues([0,10,20,30,40,50]).tickFormat(d=>d+"%")
+        .tickSize(0).tickPadding(8)).select(".domain").remove();
+  });
+
+  /* ---------- Core groups: horizontal comparison ---------- */
+  const regs=[{k:"Cross-regional",c:"var(--ishr-blue)"},{k:"WEOG",c:"var(--ishr-pink)"},{k:"African Group",c:"var(--ishr-navy)"}];
+  responsive("ishr-c-groups",(el,w)=>{
+    const h=167,labW=w<360?103:132,right=82;
+    const x=d3.scaleLinear().domain([0,6]).range([labW,w-right]);
+    const svg=d3.select(el).append("svg").attr("width",w).attr("height",h);
+    const g=svg.selectAll("g.reg").data(regs).join("g").attr("class","reg")
+      .attr("transform",(d,i)=>`translate(0,${i*53})`);
+    g.append("text").attr("class","lbl-b").attr("x",0).attr("y",36)
+      .style("font-size",w<380?"12px":"13px").text(d=>d.k);
+    g.each(function(r){
+      const list=affected.filter(a=>a.reg===r.k);
+      d3.select(this).append("rect").attr("x",x(0)).attr("y",18)
+        .attr("width",x(6)-x(0)).attr("height",26).attr("rx",4).attr("fill","#f1f4f9");
+      const bar=d3.select(this).append("rect").datum({r,list})
+        .attr("x",x(0)).attr("y",18).attr("width",x(list.length)-x(0)).attr("height",26)
+        .attr("rx",4).attr("fill",r.c);
+      bindTip(bar,d=>`<b>${d.r.k}: ${d.list.length} mandates</b>`+d.list.map(a=>"<br>"+a.m).join(""));
+      reveal(el,()=>bar.attr("width",0),()=>bar.transition().duration(600)
+        .delay(regs.indexOf(r)*170).ease(d3.easeCubicOut)
+        .attr("width",x(list.length)-x(0)));
+      d3.select(this).append("text").attr("class","lbl-b").attr("x",w-right+9)
+        .attr("y",36).style("font-size","12.5px").text(`${list.length} of ${affected.length}`);
+    });
+  });
+
+  /* Timeline: annual vs targeted vs biennial */
+  const years = [1, 2, 3, 4, 5, 6];
+  const state = {skip: [2, 5]};
+  const scen = [
+    {id:"annual", name:"Annual reporting", color:"var(--annual)", yrs: () => years},
+    {id:"targeted", name:"One targeted cut per renewal", color:"var(--written)", yrs: () => years.filter(y => !state.skip.includes(y))},
+    {id:"biennial", name:"Indefinite biennial reporting", color:"var(--accent)", yrs: () => [1, 3, 5]}
+  ];
+  const grid = d3.select("#ishr-grid");
+  const head = grid.append("div").attr("class", "tl-row").attr("aria-hidden", "true");
+  head.append("div").attr("class", "tl-head lab-sp");
+  years.forEach(y => head.append("div").attr("class", "tl-head" + (y === 4 ? " gap" : "")).text("Year " + y));
+  head.append("div").attr("class", "tl-head").style("text-align", "right").text("Reports");
+  const rows = grid.selectAll(".tl-row.s").data(scen).join("div").attr("class", "tl-row s");
+  rows.append("div").attr("class", "lab").text(d => d.name);
+  rows.each(function(s){
+    const row = d3.select(this);
+    years.forEach(y => {
+      const el = row.append(s.id === "targeted" ? "button" : "div").attr("class", "slot" + (y === 4 ? " gap" : "")).datum({s, y});
+      if (s.id === "targeted") el.attr("type", "button").on("click", () => { state.skip[y <= 3 ? 0 : 1] = y; update(); });
+    });
+    row.append("div").attr("class", "tot");
+  });
+  function cum(s){
+    const on = s.yrs(); let c = 0;
+    return [0].concat(years).map(y => { if (y > 0 && on.includes(y)) c++; return {x:y, v:c}; });
+  }
+  const redrawCum = responsive("ishr-c-cum", (el, w) => {
+    const narrow = w < 520;
+    const h = 280, m = {t:34, r: narrow ? 83 : 168, b:38, l:38};
+    const x = d3.scaleLinear().domain([0, 6]).range([m.l, w - m.r]);
+    const y = d3.scaleLinear().domain([0, 6]).range([h - m.b, m.t]);
+    const svg = d3.select(el).append("svg").attr("width", w).attr("height", h).attr("aria-hidden", "true");
+    svg.append("g").selectAll("line").data([0, 2, 4, 6]).join("line").attr("class", "gridline")
+      .attr("x1", m.l).attr("x2", w - m.r).attr("y1", d => y(d)).attr("y2", d => y(d));
+    svg.append("g").attr("class", "axis").attr("transform", `translate(${m.l},0)`)
+      .call(d3.axisLeft(y).tickValues([0, 2, 4, 6]).tickFormat(fmt).tickSize(0).tickPadding(8)).select(".domain").remove();
+    svg.append("g").attr("class", "axis").attr("transform", `translate(0,${h - m.b})`)
+      .call(d3.axisBottom(x).tickValues(years).tickFormat(d => narrow ? "Y" + d : "Year " + d).tickSize(0).tickPadding(10)).select(".domain").remove();
+    svg.append("line").attr("x1", x(3)).attr("x2", x(3)).attr("y1", m.t).attr("y2", h - m.b).attr("stroke", "var(--muted)").attr("stroke-dasharray", "3 4");
+    svg.append("text").attr("class", "lbl-m").attr("x", x(3) + 6).attr("y", m.t + 10).text("Renewal");
+    svg.append("text").attr("class", "lbl-m").attr("x", m.l).attr("y", 16)
+      .style("font-size", "12.5px").text("Cumulative written reports");
+    const line = d3.line().x(d => x(d.x)).y(d => y(d.v)).curve(d3.curveStepAfter);
+    const off = {annual:-6, targeted:0, biennial:8};
+    scen.forEach(s => {
+      const pts = cum(s), n = pts[6].v, pct = Math.round((1 - n / 6) * 100);
+      svg.append("path").attr("d", line(pts)).attr("fill", "none").attr("stroke", s.color)
+        .attr("stroke-width", s.id === "annual" ? 2 : 3).attr("stroke-dasharray", s.id === "annual" ? "5 5" : null)
+        .attr("stroke-linejoin", "round").attr("stroke-linecap", "round");
+      svg.append("circle").attr("cx", x(6)).attr("cy", y(n)).attr("r", 5).attr("fill", s.color).attr("stroke", "var(--bg)").attr("stroke-width", 2);
+      svg.append("text").attr("class", "lbl").attr("x", x(6) + 10).attr("y", y(n) + 4 + off[s.id])
+        .text(narrow ? n + (s.id === "annual" ? "" : " (−" + pct + "%)") : n + " reports" + (s.id === "annual" ? ", annual" : ", −" + pct + "%"));
+    });
+  });
+  function update(){
+    rows.each(function(s){
+      const on = s.yrs();
+      d3.select(this).selectAll(".slot").each(function(d){
+        const isOn = on.includes(d.y);
+        const el = d3.select(this).classed("on", isOn).classed("off", !isOn).style("background", isOn ? s.color : null).text(isOn ? "Report" : "Skipped");
+        if (s.id === "targeted") el.attr("aria-pressed", String(!isOn)).attr("aria-label", "Year " + d.y + ": " + (isOn ? "report, select to skip this year instead" : "skipped"));
+        else el.attr("aria-label", "Year " + d.y + ": " + (isOn ? "report" : "no report"));
+      });
+      d3.select(this).select(".tot").text(on.length + " of 6");
+    });
+    redrawCum();
+  }
+  update();
+
+
+  /* ---------- Waffle: 44 mandates, named ---------- */
+  const mandates = [];
+  affected.filter(a => !a.m.includes("(termination)")).forEach(a => mandates.push({s:"affected", t:`<b>${a.m}</b><br>Written report, already affected<br>${a.m.includes("(merger)")?"Merged":"Renewed"} at ${a.hrc}; reports cut: ${a.ga.join(", ")}`}));
+  unaffected.filter(u => !u.gaMode).forEach(u => mandates.push({s:"written", t:`<b>${u.m}</b><br>Written report, not affected<br>Renewed at ${u.hrc}`}));
+  /* Current thematic mandates not renewed at HRC60–63, checked against the OHCHR mandate list. */
+  const otherWrittenMandates = [
+    "Independent Expert on the enjoyment of human rights by persons with albinism",
+    "Special Rapporteur on the promotion and protection of human rights in the context of climate change",
+    "Special Rapporteur in the field of cultural rights",
+    "Special Rapporteur on the human right to a clean, healthy and sustainable environment",
+    "Special Rapporteur on the rights to freedom of peaceful assembly and of association",
+    "Special Rapporteur on the human rights of internally displaced persons",
+    "Special Rapporteur on the right to privacy",
+    "Special Rapporteur on freedom of religion or belief",
+    "Independent Expert on protection against violence and discrimination based on sexual orientation and gender identity",
+    "Special Rapporteur on the promotion and protection of human rights and fundamental freedoms while countering terrorism",
+    "Special Rapporteur on violence against women and girls, its causes and consequences"
+  ];
+  otherWrittenMandates.forEach(m => mandates.push({s:"written", t:`<b>${m}</b><br>Written report, thematic mandate not renewed at HRC60–63`}));
+  mandates.push({s:"oral", t:"<b>Working Group on Enforced or Involuntary Disappearances</b><br>Interactive dialogue with the General Assembly every year, without a written report"});
+  mandates.push({s:"oral", t:"<b>Working Group on Discrimination against Women and Girls</b><br>Reports orally each year to the General Assembly"});
+  mandates.push({s:"none", t:"<b>Working Group on Arbitrary Detention</b><br>Written report annually to the Human Rights Council only"});
+  const cols = 11, size = 40, gap = 8;
+  const W = cols * (size + gap) - gap, H = Math.ceil(mandates.length / cols) * (size + gap) - gap;
+  const wsvg = d3.select("#ishr-waffle").append("svg").attr("viewBox", `-3 -3 ${W + 6} ${H + 6}`).style("width", "100%").style("height", "auto")
+    .attr("role", "group").attr("aria-label", "44 thematic mandates, one square each");
+  const cells = wsvg.selectAll("rect").data(mandates).join("rect")
+    .attr("class", d => "cell cell--" + d.s)
+    .attr("x", (d, i) => (i % cols) * (size + gap)).attr("y", (d, i) => Math.floor(i / cols) * (size + gap))
+    .attr("width", size).attr("height", size).attr("rx", 4);
+  bindTip(cells, d => d.t);
+  popIn(document.getElementById("ishr-waffle"), cells, (d, i) => i * 28);
+
+  /* ---------- Recommendations: ticks ---------- */
+  const boxes = Array.from(document.querySelectorAll("#ishr-check input"));
+  const meter = document.getElementById("ishr-meter");
+  const scoreText = document.getElementById("ishr-score-text");
+  function score(){
+    const n = boxes.filter(b => b.checked).length;
+    meter.style.width = (n / 5 * 100) + "%";
+    scoreText.textContent = n + " of 5 checked";
+  }
+  boxes.forEach(b => b.addEventListener("change", score));
+  document.getElementById("ishr-reset").addEventListener("click", () => { boxes.forEach(b => b.checked = false); score(); });
+})();
+</script>
+</div>
+<script>
+/* Auto-fit: makes the iframe on the WordPress page exactly as tall as this content.
+   Works when this file is served from the same domain as the WordPress page. */
+(function(){
+  var f; try { f = window.frameElement; } catch (e) {}
+  if (!f) return;
+  var last = 0;
+  function fit(){
+    var h = Math.ceil(document.documentElement.getBoundingClientRect().height);
+    if (Math.abs(h - last) > 2) { last = h; f.style.height = h + "px"; }
+  }
+  if (window.ResizeObserver) new ResizeObserver(fit).observe(document.body);
+  window.addEventListener("load", fit);
+  window.addEventListener("resize", fit);
+  document.addEventListener("toggle", fit, true);
+  fit();
+})();
+</script>
+
+<script id="ishr-embed-selector">
+(function(){
+  const root=document.querySelector(".ishr-viz");
+  if(!root){document.documentElement.classList.remove("ishr-embed-pending");return;}
+  const styles=Array.from(root.children).filter(e=>e.tagName==="STYLE");
+  const figures=Array.from(root.querySelectorAll("figure.iv-chart"));
+  const targets=window.ISHR_EMBED_TARGETS||[];
+  const selected=window.ISHR_EMBED_CHART==="all"?figures:figures.filter(f=>targets.some(id=>f.contains(document.getElementById(id))));
+  const tip=root.querySelector("#ishr-tip");
+  if(selected.length){
+    const children=document.createDocumentFragment();
+    styles.forEach(e=>children.appendChild(e));
+    selected.forEach(e=>children.appendChild(e));
+    if(tip)children.appendChild(tip);
+    root.replaceChildren(children);
+    const heading=selected[0].querySelector(".iv-chart-title")?.textContent?.trim();
+    document.title=(heading||("ISHR chart: "+window.ISHR_EMBED_CHART))+" | ISHR";
+  }else{
+    const p=document.createElement("p");
+    p.textContent="This chart could not be loaded. Please check the chart URL or try again.";
+    root.replaceChildren(p);
+  }
+  document.documentElement.classList.remove("ishr-embed-pending");
+  document.documentElement.classList.add("ishr-embed-ready");
+  window.dispatchEvent(new Event("resize"));
+  if(window.ResizeObserver && window.parent!==window){
+    const notify=()=>window.parent.postMessage({type:"ishr-chart-height",chart:window.ISHR_EMBED_CHART,height:Math.ceil(document.documentElement.scrollHeight)},"*");
+    new ResizeObserver(notify).observe(root);
+    window.addEventListener("load",notify);
+  }
+})();
+</script>
+</body>
+</html>
