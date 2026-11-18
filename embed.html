@@ -52,6 +52,48 @@
     html.ishr-embed-ready .ishr-viz .ishr-table-only td[data-label]::before{content:attr(data-label) ": ";font-weight:700;color:#58667b;font-size:.85em}
     html.ishr-embed-ready .ishr-viz .ishr-table-only td:first-child{font-weight:600}
   }
+
+  /* Narrow-iframe layout for mobile WordPress accordions. */
+  @media (max-width:560px){
+    html.ishr-embed-ready body{font-size:15px;line-height:1.45;padding:1px 2px}
+    html.ishr-embed-ready .ishr-viz .iv-chart{padding:8px 7px 6px!important}
+    html.ishr-embed-ready .ishr-viz .iv-chart-title{font-size:1rem;line-height:1.3}
+    html.ishr-embed-ready .ishr-viz .iv-legend{gap:3px 9px;font-size:.82em}
+    html.ishr-embed-ready .ishr-viz .iv-sub{font-size:.83em}
+    html.ishr-embed-ready .ishr-viz .iv-scroll,
+    html.ishr-embed-ready .ishr-viz .iv-chart,
+    html.ishr-embed-ready .ishr-viz .ishr-table-only{min-width:0;max-width:100%}
+    html.ishr-embed-ready .ishr-viz .ishr-table-only tbody tr{padding:4px 7px;margin-bottom:6px}
+    html.ishr-embed-ready .ishr-viz .ishr-table-only td{padding:3px 2px!important;font-size:13px;line-height:1.3!important;overflow-wrap:anywhere}
+    html.ishr-embed-ready .ishr-viz .ishr-table-only td[data-label]::before{font-size:12px}
+    html.ishr-embed-ready .ishr-viz #ishr-grid{overflow-x:hidden}
+    html.ishr-embed-ready .ishr-viz #ishr-grid .tl-row{
+      min-width:0!important;
+      grid-template-columns:repeat(6,minmax(0,1fr)) 2.8em!important;
+      gap:.2em!important
+    }
+    html.ishr-embed-ready .ishr-viz #ishr-grid .slot{
+      min-width:0;min-height:2.7em;font-size:.72em;padding:0 .08em;
+      white-space:normal
+    }
+    html.ishr-embed-ready .ishr-viz #ishr-grid .tl-head{font-size:.66em;white-space:normal}
+    html.ishr-embed-ready .ishr-viz .iv-check li{padding:.48em 0}
+    html.ishr-embed-ready .ishr-viz .iv-cut{font-size:.75em}
+    html.ishr-embed-ready .ishr-viz .iv-cut th,
+    html.ishr-embed-ready .ishr-viz .iv-cut td{padding:.3em .2em;overflow-wrap:anywhere}
+  }
+  .ishr-mobile-sort{display:none}
+  @media(max-width:720px){
+    html.ishr-embed-ready .ishr-mobile-sort{
+      display:flex;flex-wrap:wrap;gap:7px;align-items:center;
+      margin:0 0 10px;font-size:14px;color:#0e2160
+    }
+    html.ishr-embed-ready .ishr-mobile-sort select{
+      min-width:0;max-width:100%;flex:1 1 145px;
+      font:inherit;padding:8px 6px;border:1px solid #cbd4e3;
+      border-radius:4px;color:#0e2160;background:#fff
+    }
+  }
 </style>
 <script>
 (function(){
@@ -918,6 +960,35 @@
         ordered.forEach(({row})=>body.appendChild(row));
       });
     });
+    // The header row is hidden on mobile, so retain column sorting using a select.
+    const sortBar=document.createElement("div");
+    sortBar.className="ishr-mobile-sort";
+    const label=document.createElement("label");
+    label.textContent="Sort by";
+    const select=document.createElement("select");
+    select.setAttribute("aria-label","Sort mandate table");
+    const defaultOption=document.createElement("option");
+    defaultOption.value="";
+    defaultOption.textContent="Choose column and direction";
+    select.appendChild(defaultOption);
+    headers.forEach((th,i)=>{
+      const labelText=th.querySelector("button")?.textContent||"Column "+(i+1);
+      for(const [directionValue,directionLabel] of [[1,"ascending"],[-1,"descending"]]){
+        const option=document.createElement("option");
+        option.value=i+":"+directionValue;
+        option.textContent=labelText+" ("+directionLabel+")";
+        select.appendChild(option);
+      }
+    });
+    select.addEventListener("change",()=>{
+      if(!select.value)return;
+      const [i,wanted]=select.value.split(":").map(Number);
+      // Pre-set state so the existing header sort handler picks the desired order.
+      active=i;direction=-wanted;
+      headers[i].querySelector("button")?.click();
+    });
+    sortBar.append(label,select);
+    table.parentNode.insertBefore(sortBar,table);
   }
   initialiseMandateSorting("ishr-t-affected",[
     d=>d.m,d=>d.hrc,
@@ -1094,8 +1165,8 @@
     const narrow=w<465;
     const labelW=narrow?89:140;
     const countW=narrow?24:60;
-    const gap=narrow?5:10;
-    const square=Math.max(22,Math.min(46,
+    const gap=narrow?4:10;
+    const square=Math.max(14,Math.min(46,
       Math.floor((w-labelW-countW-18-gap*5)/6)));
     const rowH=square+17;
     const h=3*rowH+7;
@@ -1138,7 +1209,7 @@
   const grid = d3.select("#ishr-grid");
   const head = grid.append("div").attr("class", "tl-row").attr("aria-hidden", "true");
   head.append("div").attr("class", "tl-head lab-sp");
-  years.forEach(y => head.append("div").attr("class", "tl-head" + (y === 4 ? " gap" : "")).text("Year " + y));
+  years.forEach(y => head.append("div").attr("class", "tl-head" + (y === 4 ? " gap" : "")).text((window.innerWidth<500?"Y":"Year ") + y));
   head.append("div").attr("class", "tl-head").style("text-align", "right").text("Reports");
   const rows = grid.selectAll(".tl-row.s").data(scen).join("div").attr("class", "tl-row s");
   rows.append("div").attr("class", "lab").text(d => d.name);
@@ -1187,7 +1258,7 @@
       const on = s.yrs();
       d3.select(this).selectAll(".slot").each(function(d){
         const isOn = on.includes(d.y);
-        const el = d3.select(this).classed("on", isOn).classed("off", !isOn).style("background", isOn ? s.color : null).text(isOn ? "Report" : "Skipped");
+        const el = d3.select(this).classed("on", isOn).classed("off", !isOn).style("background", isOn ? s.color : null).text(window.innerWidth<500 ? (isOn ? "✓" : "–") : (isOn ? "Report" : "Skipped"));
         if (s.id === "targeted") el.attr("aria-pressed", String(!isOn)).attr("aria-label", "Year " + d.y + ": " + (isOn ? "report, select to skip this year instead" : "skipped"));
         else el.attr("aria-label", "Year " + d.y + ": " + (isOn ? "report" : "no report"));
       });
