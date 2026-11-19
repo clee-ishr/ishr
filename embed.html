@@ -607,7 +607,7 @@
 <figure class="iv-chart">
   <ul class="iv-legend">
     <li><i class="iv-sw" style="background:var(--accent)"></i>Affected by reporting reduction, merger or termination (13)</li>
-    <li><i class="iv-sw" style="background:#a6a6a6"></i>Other mandate in merger — counted separately, not as a second affected outcome (1)</li>
+    <li><i class="iv-sw" style="background:#a6a6a6"></i>Other mandate in merger</li>
     <li><i class="iv-sw" style="background:var(--written)"></i>Written report, not affected (29)</li>
     <li><i class="iv-sw" style="background:var(--oral)"></i>Oral only (2)</li>
     <li><i class="iv-sw iv-sw--none"></i>No report to the General Assembly (1)</li>
@@ -1337,7 +1337,7 @@
   affected.forEach(a => {
     if (a.m.includes("(merger)")) {
       mandates.push({s:"affected", t:"<b>Special Rapporteur on contemporary forms of slavery, including its causes and consequences</b><br>Affected: merged at HRC60 with the trafficking mandate.<br>One merger outcome; GA reports cut: GA81, GA82, GA83."});
-      mandates.push({s:"merged", t:"<b>Special Rapporteur on trafficking in persons, especially women and children</b><br>Other original mandate in the HRC60 slavery–trafficking merger.<br>Shown separately to preserve the 46-mandate reference list; the merger counts as only one affected outcome and one report cut per GA session (GA81–GA83)."});
+      mandates.push({s:"merged", t:"<b>Special Rapporteur on trafficking in persons, especially women and children</b><br>Other original mandate in the HRC60 slavery–trafficking merger.<br>The merger counts as only one affected outcome and one report cut per GA session (GA81–GA83)."});
     } else if (a.m.includes("(termination)")) {
       mandates.push({s:"affected", t:`<b>${a.m.replace(" (termination)","")}</b><br>Mandate terminated at ${a.hrc}; source dataset lists GA reports cut: ${a.ga.join(", ")}. Historical mandate, not currently active.`});
     } else {
