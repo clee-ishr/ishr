@@ -177,6 +177,7 @@
 .ishr-viz .iv-filters button[aria-pressed="true"]{background:var(--ink);color:#fff;border-color:var(--ink)}
 .ishr-viz .cell{transition:opacity .25s ease}
 .ishr-viz .cell--affected{fill:var(--accent)}
+.ishr-viz .cell--merged{fill:#a6a6a6}
 .ishr-viz .cell--written{fill:var(--written)}
 .ishr-viz .cell--oral{fill:var(--oral)}
 .ishr-viz .cell--none{fill:transparent;stroke:var(--none);stroke-width:2;stroke-dasharray:5 4}
@@ -596,16 +597,17 @@
 </figure>
 
 <h3 id="ishr-affected">How much of the thematic reporting to the General Assembly has already been affected?</h3>
-<p>In 2026, there are currently 44 thematic Special Procedures mandates. Among these:</p>
+<p>The waffle chart uses a 46-mandate reference list, retaining both mandates involved in the HRC60 slavery–trafficking merger and the leprosy mandate subsequently terminated at HRC62. Each square represents one mandate in that reference list. Among these:</p>
 <ul>
   <li>The Working Group on Arbitrary Detention is only required to submit a written report annually to the Human Rights Council.</li>
   <li>The Chair of the Working Group on Enforced or Involuntary Disappearances engages in an interactive dialogue with the General Assembly every year without presenting a written report.</li>
   <li>The Working Group on Discrimination against Women and Girls also only reports orally each year to the General Assembly.</li>
 </ul>
-<p>Therefore, out of the 44 thematic Special Procedures mandates, <strong>41 submit written reports to the General Assembly</strong>. Two report orally only, and one does not report at all.</p>
+<p>The 46-mandate reference list includes 13 affected reporting outcomes, one separately displayed counterpart to the merger, 29 unaffected mandates with written GA reports, two mandates reporting orally only, and one without a GA reporting obligation. The merger is counted once among affected outcomes.</p>
 <figure class="iv-chart">
   <ul class="iv-legend">
-    <li><i class="iv-sw" style="background:var(--accent)"></i>Written report, already affected (12)</li>
+    <li><i class="iv-sw" style="background:var(--accent)"></i>Affected by reporting reduction, merger or termination (13)</li>
+    <li><i class="iv-sw" style="background:#a6a6a6"></i>Other mandate in merger — counted separately, not as a second affected outcome (1)</li>
     <li><i class="iv-sw" style="background:var(--written)"></i>Written report, not affected (29)</li>
     <li><i class="iv-sw" style="background:var(--oral)"></i>Oral only (2)</li>
     <li><i class="iv-sw iv-sw--none"></i>No report to the General Assembly (1)</li>
@@ -613,7 +615,7 @@
   <div id="ishr-waffle" style="max-width:34rem"></div>
 </figure>
 <div class="iv-note">
-  <p><strong>12 of the 41 thematic mandates that report in writing to the General Assembly (29%) have already been affected</strong> by reduced reporting periodicity or merger — close to three in ten. In addition, the mandate on leprosy has been terminated.</p>
+  <p><strong>13 affected outcomes are shown in the 46-mandate reference list.</strong> The slavery–trafficking merger counts as one affected outcome, although both original mandates appear as separate squares. The leprosy mandate is included as a terminated mandate. These are historical reference entries, not 46 currently active mandates.</p>
 </div>
 
 <h3>What does ISHR recommend for future changes to reporting requirements?</h3>
@@ -1328,11 +1330,22 @@
   update();
 
 
-  /* ---------- Waffle: 44 mandates, named ---------- */
+  /* ---------- Waffle: 46-mandate reference list ---------- */
   const mandates = [];
-  affected.filter(a => !a.m.includes("(termination)")).forEach(a => mandates.push({s:"affected", t:`<b>${a.m}</b><br>Written report, already affected<br>${a.m.includes("(merger)")?"Merged":"Renewed"} at ${a.hrc}; reports cut: ${a.ga.join(", ")}`}));
-  unaffected.filter(u => !u.gaMode).forEach(u => mandates.push({s:"written", t:`<b>${u.m}</b><br>Written report, not affected<br>Renewed at ${u.hrc}`}));
-  /* Current thematic mandates not renewed at HRC60–63, checked against the OHCHR mandate list. */
+  // One affected outcome for the merger, plus a separate explanatory square for
+  // the second original mandate. This avoids double-counting the GA reports cut.
+  affected.forEach(a => {
+    if (a.m.includes("(merger)")) {
+      mandates.push({s:"affected", t:"<b>Special Rapporteur on contemporary forms of slavery, including its causes and consequences</b><br>Affected: merged at HRC60 with the trafficking mandate.<br>One merger outcome; GA reports cut: GA81, GA82, GA83."});
+      mandates.push({s:"merged", t:"<b>Special Rapporteur on trafficking in persons, especially women and children</b><br>Other original mandate in the HRC60 slavery–trafficking merger.<br>Shown separately to preserve the 46-mandate reference list; the merger counts as only one affected outcome and one report cut per GA session (GA81–GA83)."});
+    } else if (a.m.includes("(termination)")) {
+      mandates.push({s:"affected", t:`<b>${a.m.replace(" (termination)","")}</b><br>Mandate terminated at ${a.hrc}; source dataset lists GA reports cut: ${a.ga.join(", ")}. Historical mandate, not currently active.`});
+    } else {
+      mandates.push({s:"affected", t:`<b>${a.m}</b><br>Written GA reporting affected<br>Renewed at ${a.hrc}; reports cut: ${a.ga.join(", ")}`});
+    }
+  });
+  unaffected.filter(u => !u.gaMode).forEach(u => mandates.push({s:"written", t:`<b>${u.m}</b><br>Written GA report, unaffected<br>Renewed at ${u.hrc}`}));
+  /* Thematic mandates not renewed at HRC60–63, unchanged from the source list. */
   const otherWrittenMandates = [
     "Independent Expert on the enjoyment of human rights by persons with albinism",
     "Special Rapporteur on the promotion and protection of human rights in the context of climate change",
@@ -1346,14 +1359,15 @@
     "Special Rapporteur on the promotion and protection of human rights and fundamental freedoms while countering terrorism",
     "Special Rapporteur on violence against women and girls, its causes and consequences"
   ];
-  otherWrittenMandates.forEach(m => mandates.push({s:"written", t:`<b>${m}</b><br>Written report, thematic mandate not renewed at HRC60–63`}));
+  otherWrittenMandates.forEach(m => mandates.push({s:"written", t:`<b>${m}</b><br>Written GA report, unaffected<br>Thematic mandate not renewed at HRC60–63`}));
   mandates.push({s:"oral", t:"<b>Working Group on Enforced or Involuntary Disappearances</b><br>Interactive dialogue with the General Assembly every year, without a written report"});
   mandates.push({s:"oral", t:"<b>Working Group on Discrimination against Women and Girls</b><br>Reports orally each year to the General Assembly"});
   mandates.push({s:"none", t:"<b>Working Group on Arbitrary Detention</b><br>Written report annually to the Human Rights Council only"});
-  const cols = 11, size = 40, gap = 8;
+  if (mandates.length !== 46) throw new Error("Expected 46 mandates in the waffle chart");
+  const cols = 10, size = 40, gap = 8;
   const W = cols * (size + gap) - gap, H = Math.ceil(mandates.length / cols) * (size + gap) - gap;
   const wsvg = d3.select("#ishr-waffle").append("svg").attr("viewBox", `-3 -3 ${W + 6} ${H + 6}`).style("width", "100%").style("height", "auto")
-    .attr("role", "group").attr("aria-label", "44 thematic mandates, one square each");
+    .attr("role", "group").attr("aria-label", "46 thematic mandates in the reference list, one square each");
   const cells = wsvg.selectAll("rect").data(mandates).join("rect")
     .attr("class", d => "cell cell--" + d.s)
     .attr("x", (d, i) => (i % cols) * (size + gap)).attr("y", (d, i) => Math.floor(i / cols) * (size + gap))
